@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <div className="container">
+    <div style={{ fontFamily: "sans-serif" }}>
       <Outlet />
     </div>
   );
