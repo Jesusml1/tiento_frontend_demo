@@ -63,8 +63,8 @@ function VerifyEmail() {
         })
         .then((res) => {
           console.log(res.data);
-          if (res.data.payload.data[0] !== null) {
-            localStorage.setItem("user", JSON.stringify(res.data.payload.data[0]));
+          if (res.data.result?.data[0] !== null) {
+            localStorage.setItem("user", JSON.stringify(res.data?.result?.data[0]));
             navigate("/dashboard");
           }
         })
