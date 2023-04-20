@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useTimer from "@/hooks/useTimer";
 import axios from "axios";
 import { useUserAuth } from "@/hooks/useUserAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function VerifyEmail() {
   const { user, apiUrl } = useUserAuth();
@@ -11,6 +11,8 @@ function VerifyEmail() {
   const [verificationCode, setVerificationCode] = useState("");
   const [time, startTimer, stopTimer] = useTimer(300000); // 300000 ms == 5 min
   const [emailSubmited, setEmailSubmited] = useState(false);
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('t');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +39,7 @@ function VerifyEmail() {
         .post(apiUrl + "/api/auth/verify", {
           email: email,
           discord_id: user?.id,
+          token: token
         })
         .then((res) => {
           if (res.status === 200) {
