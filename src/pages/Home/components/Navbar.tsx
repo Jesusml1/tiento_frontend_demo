@@ -10,7 +10,7 @@ function NavBar() {
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span>{user.username}</span>
             <img
-              src={user.avatarUrl}
+              src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`}
               alt={`${user.username} profile picture`}
               style={{ borderRadius: 50, width: 50, height: 50 }}
             />

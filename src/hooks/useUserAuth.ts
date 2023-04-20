@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import { useSearchParams } from 'react-router-dom';
 
 const apiUrl = import.meta.env.VITE_API_URL
 
@@ -13,25 +13,33 @@ interface DiscordUser {
 
 export const useUserAuth = () => {
     const [user, setUser] = useState<DiscordUser | null>(null);
-    const [cookies, _, removeCookie] = useCookies(['discord_access_token']);
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get('t');
 
     useEffect(() => {
-        if (apiUrl && cookies.discord_access_token) {
+        const storedUser = localStorage.getItem('discord_user_info');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser))
+        }
+
+        if (apiUrl && token) {
             axios.get(apiUrl + '/api/auth/user', {
-                headers: { Authorization: `Bearer ${cookies.discord_access_token}` }
+                headers: { Authorization: `Bearer ${token}` }
             }).then(response => {
                 const user = response.data;
-                const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`;
-                setUser({ ...user, avatarUrl });
+                setUser(user);
+                localStorage.setItem('discord_user_info', JSON.stringify(user));
             }).catch(error => {
                 console.error(error);
+                localStorage.removeItem('discord_user_info');
             });
         }
-    }, [apiUrl, cookies.discord_access_token]);
+    }, [apiUrl, token]);
 
     const handleLogout = () => {
-        removeCookie('discord_access_token');
         setUser(null);
+        localStorage.removeItem('user');
+        localStorage.removeItem('discord_user_info');
     };
 
     return { user, handleLogout, apiUrl };
