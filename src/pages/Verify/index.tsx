@@ -12,7 +12,7 @@ function VerifyEmail() {
   const [time, startTimer, stopTimer] = useTimer(300000); // 300000 ms == 5 min
   const [emailSubmited, setEmailSubmited] = useState(false);
   const [searchParams] = useSearchParams();
-  const token = searchParams.get('t');
+  const token = searchParams.get("t");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function VerifyEmail() {
         .post(apiUrl + "/api/auth/verify", {
           email: email,
           discord_id: user?.id,
-          token: token
+          token: token,
         })
         .then((res) => {
           if (res.status === 200) {
@@ -63,15 +63,22 @@ function VerifyEmail() {
       axios
         .put(apiUrl + "/api/auth/verify-email", {
           code: verificationCode,
+          token: token,
         })
         .then((res) => {
           console.log(res.data);
           if (res.data.result?.data[0] !== null) {
-            localStorage.setItem("user", JSON.stringify(res.data?.result?.data[0]));
+            localStorage.setItem(
+              "user",
+              JSON.stringify(res.data?.result?.data[0])
+            );
             navigate("/dashboard");
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          alert("invalid verification code");
+        })
         .finally(() => {
           setLoading(false);
         });
