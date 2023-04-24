@@ -1,7 +1,9 @@
 import { useUserAuth } from "@/hooks/useUserAuth";
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 function NavBar() {
-  const { handleLogout, user, apiUrl } = useUserAuth();
+  const { handleLogout, user } = useUserAuth();
 
   return (
     <nav>

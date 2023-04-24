@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '@/utils/axios';
 import { useSearchParams } from 'react-router-dom';
-
-const apiUrl = import.meta.env.VITE_API_URL
 
 interface DiscordUser {
     username: string;
@@ -22,8 +20,8 @@ export const useUserAuth = () => {
             setUser(JSON.parse(storedUser))
         }
 
-        if (apiUrl && token) {
-            axios.get(apiUrl + '/api/auth/user', {
+        if (token) {
+            axios.get('/api/auth/user', {
                 headers: { Authorization: `Bearer ${token}` }
             }).then(response => {
                 const user = response.data;
@@ -34,7 +32,7 @@ export const useUserAuth = () => {
                 localStorage.removeItem('discord_user_info');
             });
         }
-    }, [apiUrl, token]);
+    }, [token]);
 
     const handleLogout = () => {
         setUser(null);
@@ -42,5 +40,5 @@ export const useUserAuth = () => {
         localStorage.removeItem('discord_user_info');
     };
 
-    return { user, handleLogout, apiUrl };
+    return { user, handleLogout };
 };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import useTimer from "@/hooks/useTimer";
-import axios from "axios";
+import axios from "@/utils/axios";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 function VerifyEmail() {
-  const { user, apiUrl } = useUserAuth();
+  const { user } = useUserAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -36,11 +36,11 @@ function VerifyEmail() {
     } else {
       setLoading(true);
       axios
-        .post(apiUrl + "/api/auth/verify", {
-          email: email,
-          discord_id: user?.id,
-          token: token,
-        })
+        .post(
+          "/api/auth/verify",
+          { email: email, discord_id: user?.id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
         .then((res) => {
           if (res.status === 200) {
             setEmailSubmited(true);
@@ -61,10 +61,11 @@ function VerifyEmail() {
     } else {
       setLoading(true);
       axios
-        .put(apiUrl + "/api/auth/verify-email", {
-          code: verificationCode,
-          token: token,
-        })
+        .put(
+          "/api/auth/verify-email",
+          { code: verificationCode },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.result?.data[0] !== null) {
