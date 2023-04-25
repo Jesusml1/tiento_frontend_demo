@@ -18,7 +18,7 @@ function VerifyEmail() {
   useEffect(() => {
     if (time === 0) {
       stopTimer();
-      alert("time out! resend your email");
+      alert("Time's up, resend your email to receive a new validation code");
       setEmailSubmited(false);
     }
   }, [time]);
