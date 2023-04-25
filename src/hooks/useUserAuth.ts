@@ -15,9 +15,10 @@ export const useUserAuth = () => {
     const token = searchParams.get('t');
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('discord_user_info');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser))
+        const discordUserInfo = localStorage.getItem('discord_user_info');
+        const userInfo = localStorage.getItem('user');
+        if (userInfo && discordUserInfo) {
+            setUser(JSON.parse(discordUserInfo))
         }
 
         if (token) {
