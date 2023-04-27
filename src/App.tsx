@@ -5,6 +5,7 @@ import NoMatch from "./pages/NoMatch";
 import VerifyEmail from "./pages/Verify";
 import Dashboard from "./pages/Dashboard";
 import Banned from "./pages/Banned";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="banned" element={<Banned />} />
+        <Route path="landing" element={<Landing />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
