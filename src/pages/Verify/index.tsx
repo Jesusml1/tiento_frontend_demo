@@ -3,6 +3,16 @@ import useTimer from "@/hooks/useTimer";
 import axios from "@/utils/axios";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Input,
+  Space,
+  Title,
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 
 function VerifyEmail() {
   const { user } = useUserAuth();
@@ -18,7 +28,11 @@ function VerifyEmail() {
   useEffect(() => {
     if (time === 0) {
       stopTimer();
-      alert("Time's up, resend your email to receive a new validation code");
+      notifications.show({
+        title: "Time's up",
+        message: "Resend your email to receive a new validation code",
+        color: "yellow",
+      });
       setEmailSubmited(false);
     }
   }, [time]);
@@ -32,7 +46,11 @@ function VerifyEmail() {
   function handleEmailSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (email === "") {
-      alert("you must introduce a valid email");
+      notifications.show({
+        title: "There is no email",
+        message: "You must introduce a valid email",
+        color: "red",
+      });
     } else {
       setLoading(true);
       axios
@@ -43,6 +61,11 @@ function VerifyEmail() {
         )
         .then((res) => {
           if (res.status === 200) {
+            notifications.show({
+              title: "Verification code sent!",
+              message: "Check your inbox, please",
+              color: "green",
+            });
             setEmailSubmited(true);
             startTimer();
           }
@@ -57,7 +80,11 @@ function VerifyEmail() {
   function handleVerficationCodeSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (verificationCode === "") {
-      alert("you must introduce the verification code send to your email");
+      notifications.show({
+        title: "Empty verification code",
+        message: "You must introduce the verification code send to your email",
+        color: "red",
+      });
     } else {
       setLoading(true);
       axios
@@ -78,7 +105,12 @@ function VerifyEmail() {
         })
         .catch((err) => {
           console.log(err);
-          alert("invalid verification code");
+          notifications.show({
+            title: "Invalid verification code",
+            message:
+              "You must introduce the verification code send to your email",
+            color: "red",
+          });
         })
         .finally(() => {
           setLoading(false);
@@ -87,34 +119,49 @@ function VerifyEmail() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        minHeight: "80vh",
-      }}
-    >
-      <div>
-        <h2>Verify your email</h2>
-        <div style={{ display: "flex", rowGap: 20, flexDirection: "column" }}>
-          <div style={{ display: "flex", flexDirection: "column", rowGap: 10 }}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              value={email}
-              disabled={emailSubmited}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
-            <button
-              style={{ alignSelf: "end" }}
+    <Center maw={400} mih="80vh" h={500} mx="auto">
+      <Container
+        sx={(theme) => ({
+          backgroundColor: theme.colors.dark[6],
+          borderRadius: 5,
+        })}
+        miw={300}
+        p={20}
+      >
+        <Title order={2} mb={20}>
+          Verify your email
+        </Title>
+        <div
+          style={{
+            display: "flex",
+            rowGap: 20,
+            flexDirection: "column",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              rowGap: 10,
+              width: "100%",
+            }}
+          >
+            <Input.Wrapper label="Email">
+              <Input
+                placeholder="Enter your email"
+                id="email"
+                value={email}
+                disabled={emailSubmited}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Input.Wrapper>
+            <Button
               onClick={handleEmailSubmit}
               disabled={emailSubmited || loading}
             >
               Send code
-            </button>
+            </Button>
           </div>
 
           {emailSubmited && <div>time left: {formatTime(time)}</div>}
@@ -123,25 +170,22 @@ function VerifyEmail() {
             <div
               style={{ display: "flex", flexDirection: "column", rowGap: 10 }}
             >
-              <label htmlFor="verification_code">Verification code</label>
-              <input
-                id="verification_code"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                placeholder="verification code"
-              />
-              <button
-                style={{ alignSelf: "end" }}
-                disabled={loading}
-                onClick={handleVerficationCodeSubmit}
-              >
+              <Input.Wrapper label="Verification code">
+                <Input
+                  id="verification_code"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  placeholder="verification code"
+                />
+              </Input.Wrapper>
+              <Button disabled={loading} onClick={handleVerficationCodeSubmit}>
                 Verify
-              </button>
+              </Button>
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </Container>
+    </Center>
   );
 }
 
