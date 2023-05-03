@@ -33,9 +33,9 @@ function HomeNav() {
   return (
     <NavContainer>
       <NavButton href="#">DOCS</NavButton>
-      <NavButton href="#">DISCORD</NavButton>
-      <NavButton href="#">INSTAGRAM</NavButton>
-      <NavButton href="#">TWITTER</NavButton>
+      <NavButton href="https://discord.gg/t47WVQUd" target="_blank">DISCORD</NavButton>
+      <NavButton href="https://instagram.com/tientonft" target="_blank">INSTAGRAM</NavButton>
+      <NavButton href="https://twitter.com/nerdyraverr" target="_blank">TWITTER</NavButton>
     </NavContainer>
   );
 }
