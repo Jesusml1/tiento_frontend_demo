@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import { keyframes } from "@emotion/react";
+import ShapedButton from "./ShapedButton";
 
 const enter = keyframes`
   0%, 50% { opacity: 0 }
@@ -21,14 +22,41 @@ const LogoContainer = styled.div`
   }
 `;
 
+const Fill = styled.div`
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 75% 100%, 0% 100%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const Corner = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  width: 25%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 20;
+  clip-path: polygon(100% 20%, 100% 100%, 20% 100%);
+`;
+
 const StartButton = styled.button`
-  padding: 20px;
+  position: relative;
+  width: 200px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   background: none;
-  border: 2px solid white;
+  border: none;
+  text-decoration: none;
   cursor: pointer;
-  min-width: 150px;
-  &:hover {
-    background-color: rgba(156, 247, 250, 0.1);
+  &:hover ${Fill}, &:hover ${Corner} {
+    background: rgba(255, 255, 255, 0.2);
   }
 `;
 
@@ -38,7 +66,11 @@ function TientoInit({ handleShowLanding }: { handleShowLanding: Function }) {
       <LogoContainer>
         <TientoLogo />
       </LogoContainer>
-      <StartButton onClick={() => handleShowLanding()}>START</StartButton>
+      <StartButton onClick={() => handleShowLanding()}>
+        <Fill />
+        <Corner />
+        START
+      </StartButton>
     </Container>
   );
 }

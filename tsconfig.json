@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["./src/*", "./dist/*", "./"],
     },
-    "types": ["vite-plugin-svgr/client", "node"]
+    "types": ["vite-plugin-svgr/client", "node"],
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
