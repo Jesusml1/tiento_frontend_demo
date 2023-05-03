@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import AppShellDemo from "./pages/Appshell";
+import { CustomFonts } from "./Layout/CustomFonts";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       withNormalizeCSS
       theme={{ colorScheme: "dark" }}
     >
+      <CustomFonts />
       <Notifications position="top-right" />
       <Routes>
         <Route path="/" element={<Layout />}>
