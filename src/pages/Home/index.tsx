@@ -22,6 +22,7 @@ const HomeContainer = styled.div`
   align-items: center;
   position: relative;
   overflow: hidden;
+  cursor: crosshair;
 `;
 
 function Home() {
