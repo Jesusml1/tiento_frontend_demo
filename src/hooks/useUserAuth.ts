@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '@/utils/axios';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface DiscordUser {
     username: string;
@@ -13,11 +13,12 @@ export const useUserAuth = () => {
     const [user, setUser] = useState<DiscordUser | null>(null);
     const [searchParams] = useSearchParams();
     const token = searchParams.get('t');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const discordUserInfo = localStorage.getItem('discord_user_info');
         const userInfo = localStorage.getItem('user');
-        if (userInfo && discordUserInfo) {
+        if (discordUserInfo) {
             setUser(JSON.parse(discordUserInfo))
         }
 
@@ -28,6 +29,7 @@ export const useUserAuth = () => {
                 const user = response.data;
                 setUser(user);
                 localStorage.setItem('discord_user_info', JSON.stringify(user));
+                navigate('/dashboard')
             }).catch(error => {
                 console.error(error);
                 localStorage.removeItem('discord_user_info');
@@ -39,6 +41,7 @@ export const useUserAuth = () => {
         setUser(null);
         localStorage.removeItem('user');
         localStorage.removeItem('discord_user_info');
+        navigate('/');
     };
 
     return { user, handleLogout };
