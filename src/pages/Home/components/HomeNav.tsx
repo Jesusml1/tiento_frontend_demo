@@ -29,14 +29,42 @@ const NavButton = styled.a`
   }
 `;
 
-function HomeNav() {
+function HomeNav({ setIsHovered }: { setIsHovered: (isHovered: boolean) => void }) {
   return (
     <NavContainer>
-      <NavButton href="#">DOCS</NavButton>
-      <NavButton href="https://discord.gg/t47WVQUd" target="_blank">DISCORD</NavButton>
-      <NavButton href="https://instagram.com/tientonft" target="_blank">INSTAGRAM</NavButton>
-      <NavButton href="https://twitter.com/nerdyraverr" target="_blank">TWITTER</NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        DOCS
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="https://discord.gg/t47WVQUd"
+        target="_blank"
+      >
+        DISCORD
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="https://instagram.com/tientonft"
+        target="_blank"
+      >
+        INSTAGRAM
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="https://twitter.com/nerdyraverr"
+        target="_blank"
+      >
+        TWITTER
+      </NavButton>
     </NavContainer>
   );
 }
+
 export default HomeNav;

@@ -30,7 +30,7 @@ const OutlinedText = styled.div`
 
 const Fill = styled.div`
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 75% 100%, 0% 100%);
   top: 0;
   left: 0;
@@ -44,7 +44,7 @@ const Corner = styled.div`
   right: 0;
   height: 50%;
   width: 25%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   z-index: 20;
   clip-path: polygon(100% 20%, 100% 100%, 20% 100%);
 `;
@@ -62,11 +62,15 @@ const SignUpButton = styled.a`
   text-decoration: none;
   cursor: pointer;
   &:hover ${Fill}, &:hover ${Corner} {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
   }
 `;
 
-function TientoHero() {
+function TientoHero({
+  setIsHovered,
+}: {
+  setIsHovered: (isHovered: boolean) => void;
+}) {
   return (
     <HeroContainer>
       <TientoLogo width={150} height={150} />
@@ -75,7 +79,11 @@ function TientoHero() {
         <div>TIENTO</div>
         <OutlinedText>EXPERIENCE</OutlinedText>
       </Title>
-      <SignUpButton href={`${apiUrl}/api/auth/discord`}>
+      <SignUpButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href={`${apiUrl}/api/auth/discord`}
+      >
         <Fill />
         <Corner />
         CONNECT WITH DISCORD

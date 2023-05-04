@@ -17,8 +17,19 @@ const PhaseContainer = styled.div`
   }
 `;
 
-function PhaseLabel() {
-  return <PhaseContainer>PHASE 01</PhaseContainer>;
+function PhaseLabel({
+  setIsHovered,
+}: {
+  setIsHovered: (isHovered: boolean) => void;
+}) {
+  return (
+    <PhaseContainer
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      PHASE 01
+    </PhaseContainer>
+  );
 }
 
 export default PhaseLabel;

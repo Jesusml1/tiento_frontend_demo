@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import { keyframes } from "@emotion/react";
-import ShapedButton from "./ShapedButton";
 
 const enter = keyframes`
   0%, 50% { opacity: 0 }
@@ -24,7 +23,7 @@ const LogoContainer = styled.div`
 
 const Fill = styled.div`
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 75% 100%, 0% 100%);
   top: 0;
   left: 0;
@@ -38,7 +37,7 @@ const Corner = styled.div`
   right: 0;
   height: 50%;
   width: 25%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   z-index: 20;
   clip-path: polygon(100% 20%, 100% 100%, 20% 100%);
 `;
@@ -56,17 +55,27 @@ const StartButton = styled.button`
   text-decoration: none;
   cursor: pointer;
   &:hover ${Fill}, &:hover ${Corner} {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
   }
 `;
 
-function TientoInit({ handleShowLanding }: { handleShowLanding: Function }) {
+function TientoInit({
+  handleShowLanding,
+  setIsHovered,
+}: {
+  handleShowLanding: Function;
+  setIsHovered: (isHovered: boolean) => void;
+}) {
   return (
     <Container>
       <LogoContainer>
         <TientoLogo />
       </LogoContainer>
-      <StartButton onClick={() => handleShowLanding()}>
+      <StartButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => handleShowLanding()}
+      >
         <Fill />
         <Corner />
         START

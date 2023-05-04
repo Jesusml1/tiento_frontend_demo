@@ -1,6 +1,6 @@
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import PointerCorners from "./PointerCorners";
 import PointerDots from "./PointerDots";
 
@@ -24,27 +24,15 @@ const pointerHover = keyframes`
   to { transform: rotate(45deg); }
 `;
 
-function Pointer(props: { containerRef: RefObject<HTMLDivElement> }) {
+function Pointer({ isHovered }: { isHovered: boolean }) {
   const pointerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const pointer = pointerRef.current;
-    const viewport = props.containerRef.current;
-    if (!pointer || !viewport) return;
+    if (!pointer) return;
 
     const handlePointerMove = (event: PointerEvent) => {
       const { clientX, clientY } = event;
-
-      const rect = viewport.getBoundingClientRect();
-      const isInside =
-        clientX >= rect.left &&
-        clientX <= rect.right &&
-        clientY >= rect.top &&
-        clientY <= rect.bottom;
-      if (!isInside) {
-        return;
-      }
-
       pointer.animate(
         {
           left: `${clientX}px`,
@@ -62,9 +50,21 @@ function Pointer(props: { containerRef: RefObject<HTMLDivElement> }) {
   }, []);
 
   return (
-    <PointerContainer ref={pointerRef}>
-      <PointerCorners />
-      <PointerDots />
+    <PointerContainer
+      ref={pointerRef}
+      css={
+        isHovered ?
+        css`
+          animation: ${pointerHover} 300ms ease-in-out;
+          transform: rotate(45deg);
+        `:
+        css`
+          animation: ${pointerInit} 300ms ease-in-out;
+        `
+      }
+    >
+      <PointerCorners isHovered={isHovered} />
+      <PointerDots isHovered={isHovered} />
     </PointerContainer>
   );
 }
