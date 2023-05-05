@@ -103,7 +103,7 @@ function Dashboard() {
               </Grid.Col>
             ))
           ) : (
-            <div>There is no messages</div>
+            <div>There are no messages</div>
           )}
         </Grid>
       )}
