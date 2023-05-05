@@ -3,6 +3,7 @@ import NavBar from "../Home/components/Navbar";
 import axios from "@/utils/axios";
 import { Box, Button, Container, Flex, Grid, Loader } from "@mantine/core";
 import { useUserAuth } from "@/hooks/useUserAuth";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 enum RoleNames {
   TRYOUT = "tryout",
@@ -17,10 +18,12 @@ type Message = {
 };
 
 function Dashboard() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedLevel, setSelectedLevel] = useState('');
-  const {user} = useUserAuth();
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const { user } = useUserAuth();
 
   function fetchMessages() {
     setLoading(true);
@@ -37,14 +40,16 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    setSelectedLevel(RoleNames.TRYOUT)
-  }, [])
+    const token = searchParams.get("t");
+    if (token) navigate("/dashboard");
+    setSelectedLevel(RoleNames.TRYOUT);
+  }, []);
 
   useEffect(() => {
     if (user) {
       fetchMessages();
     }
-  }, [user,selectedLevel]);
+  }, [user, selectedLevel]);
 
   return (
     <Container>

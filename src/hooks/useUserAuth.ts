@@ -29,7 +29,6 @@ export const useUserAuth = () => {
                 const user = response.data;
                 setUser(user);
                 localStorage.setItem('discord_user_info', JSON.stringify(user));
-                navigate('/dashboard')
             }).catch(error => {
                 console.error(error);
                 localStorage.removeItem('discord_user_info');
