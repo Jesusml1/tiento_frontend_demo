@@ -35,7 +35,10 @@ function Dashboard() {
       .then((res) => {
         setMessages(res.data.result);
       })
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        setMessages([])
+        console.error(err)
+      })
       .finally(() => setLoading(false));
   }
 
