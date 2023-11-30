@@ -1,3 +1,4 @@
+import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
@@ -7,7 +8,11 @@ const PhaseContainer = styled.div`
   left: 100px;
   padding: 20px;
   border-top: 1px solid white;
-  animation: ${keyframes`from{opacity: 0;}to{opacity: 1;}`} 2s ease-in-out;
+  animation: ${keyframes`
+    0%{opacity: 0;}
+    80%{opacity: 0;}
+    100%{opacity: 1;}
+  `} ${LANDING_ANIMATION_DURATION} ease-in-out;
   &:hover {
     border-color: rgb(156, 247, 250);
     color: rgb(156, 247, 250);
