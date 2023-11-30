@@ -26,7 +26,7 @@ const HomeContainer = styled.div`
 `;
 
 function Home() {
-  const [showLanding, setShowLanding] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
