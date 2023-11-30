@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
+import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
 
 const NavContainer = styled.div`
   position: absolute;
@@ -8,7 +9,11 @@ const NavContainer = styled.div`
   right: 100px;
   width: auto;
   column-gap: 10px;
-  animation: ${keyframes`from{opacity: 0;}to{opacity: 1;}`} 2s ease-in-out;
+  animation: ${keyframes`
+    0%{opacity: 0;}
+    80%{opacity: 0;}
+    100%{opacity: 1;}
+    `} ${LANDING_ANIMATION_DURATION} ease-in-out;
   @media (max-width: 768px) {
     display: none;
   }
@@ -29,7 +34,11 @@ const NavButton = styled.a`
   }
 `;
 
-function HomeNav({ setIsHovered }: { setIsHovered: (isHovered: boolean) => void }) {
+function HomeNav({
+  setIsHovered,
+}: {
+  setIsHovered: (isHovered: boolean) => void;
+}) {
   return (
     <NavContainer>
       <NavButton

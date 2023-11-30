@@ -1,0 +1,1 @@
+export const LANDING_ANIMATION_DURATION = "1500ms";

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import { keyframes } from "@emotion/react";
+import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -9,7 +10,11 @@ const HeroContainer = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
-  animation: ${keyframes`from{opacity: 0;}to{opacity: 1;}`} 2s ease-in-out;
+  animation: ${keyframes`
+    0%{opacity: 0;}
+    80%{opacity: 0;}
+    100%{opacity: 1;}
+  `} ${LANDING_ANIMATION_DURATION} ease-in-out;
 `;
 
 const Title = styled.div`
@@ -73,12 +78,12 @@ function TientoHero({
 }) {
   return (
     <HeroContainer>
-      <TientoLogo width={150} height={150} />
-      <Title>
+      <TientoLogo width={300} height={300} />
+      {/* <Title>
         <OutlinedText>JOIN THE</OutlinedText>
         <div>TIENTO</div>
         <OutlinedText>EXPERIENCE</OutlinedText>
-      </Title>
+      </Title> */}
       <SignUpButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
