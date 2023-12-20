@@ -13,7 +13,7 @@ import DiscordMessages from "./DiscordMessages";
 import InstagramMessages from "./InstagramPosts";
 import XPosts from "./TwitterPosts";
 
-const PageContent = styled.div`
+export const PageContent = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;

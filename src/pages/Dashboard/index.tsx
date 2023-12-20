@@ -4,6 +4,16 @@ import axios from "@/utils/axios";
 import { Box, Button, Container, Flex, Grid, Loader } from "@mantine/core";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { HomeContainer } from "../Home";
+import ScreenOverlay from "../Home/components/ScreenOverlay";
+import DisplayBorders from "../Home/components/DisplayBorders";
+import PhaseLabel from "../Home/components/PhaseLabel";
+import HomeNav from "../Home/components/HomeNav";
+import { PageContent } from "../Community";
+import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
+import PageTitle from "@/components/PageTitle";
+import BackgroundImageOverlay from "../Community/BackgroundImageOverlay";
+import Pointer from "../Home/components/Pointer/Pointer";
 
 enum RoleNames {
   TRYOUT = "tryout",
@@ -24,6 +34,7 @@ function Dashboard() {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedLevel, setSelectedLevel] = useState("");
   const { user } = useUserAuth();
+  const [isHovered, setIsHovered] = useState(false);
 
   function fetchMessages() {
     setLoading(true);
@@ -36,8 +47,8 @@ function Dashboard() {
         setMessages(res.data.result);
       })
       .catch((err) => {
-        setMessages([])
-        console.error(err)
+        setMessages([]);
+        console.error(err);
       })
       .finally(() => setLoading(false));
   }
@@ -55,62 +66,143 @@ function Dashboard() {
   }, [user, selectedLevel]);
 
   return (
-    <Container>
-      <NavBar />
-      <h1>Dashboard</h1>
-      <h2>Messages</h2>
-      <Flex columnGap={10} mb={20}>
-        <Button
-          variant={selectedLevel === RoleNames.TRYOUT ? "filled" : "outline"}
-          onClick={() => setSelectedLevel(RoleNames.TRYOUT)}
-        >
-          Tryout
-        </Button>
-        <Button
-          variant={selectedLevel === RoleNames.ACADEMY ? "filled" : "outline"}
-          onClick={() => setSelectedLevel(RoleNames.ACADEMY)}
-        >
-          Academy
-        </Button>
-        <Button
-          variant={
-            selectedLevel === RoleNames.FIRST_TEAM ? "filled" : "outline"
-          }
-          onClick={() => setSelectedLevel(RoleNames.FIRST_TEAM)}
-        >
-          First team
-        </Button>
-        <Button
-          variant={selectedLevel === RoleNames.LEGEND ? "filled" : "outline"}
-          onClick={() => setSelectedLevel(RoleNames.LEGEND)}
-        >
-          Legends
-        </Button>
-      </Flex>
-      {loading ? (
-        <Flex justify="center" pt={20}>
-          <Loader variant="bars" />
-        </Flex>
-      ) : (
-        <Grid>
-          {messages.length ? (
-            messages.map((message) => (
-              <Grid.Col lg={3} key={message.id}>
-                <Box
-                  p={10}
-                  style={{ border: "1px solid white", borderRadius: "5px" }}
-                >
-                  {/* <div>{message.author.username}</div> */}
-                  <div>{message.content}</div>
-                </Box>
-              </Grid.Col>
-            ))
-          ) : (
-            <div>There are no messages</div>
-          )}
-        </Grid>
-      )}
-    </Container>
+    <div>
+      <HomeContainer>
+        <ScreenOverlay />
+
+        <DisplayBorders>
+          <PhaseLabel setIsHovered={setIsHovered} />
+          <HomeNav setIsHovered={setIsHovered} />
+          <PageContent>
+            <TientoLogo width={150} height={150} />
+            <PageTitle>Messages</PageTitle>
+
+            <Flex columnGap={10} mb={20}>
+              <Button
+                variant={
+                  selectedLevel === RoleNames.TRYOUT ? "filled" : "outline"
+                }
+                onClick={() => setSelectedLevel(RoleNames.TRYOUT)}
+              >
+                Tryout
+              </Button>
+              <Button
+                variant={
+                  selectedLevel === RoleNames.ACADEMY ? "filled" : "outline"
+                }
+                onClick={() => setSelectedLevel(RoleNames.ACADEMY)}
+              >
+                Academy
+              </Button>
+              <Button
+                variant={
+                  selectedLevel === RoleNames.FIRST_TEAM ? "filled" : "outline"
+                }
+                onClick={() => setSelectedLevel(RoleNames.FIRST_TEAM)}
+              >
+                First team
+              </Button>
+              <Button
+                variant={
+                  selectedLevel === RoleNames.LEGEND ? "filled" : "outline"
+                }
+                onClick={() => setSelectedLevel(RoleNames.LEGEND)}
+              >
+                Legends
+              </Button>
+            </Flex>
+            {loading ? (
+              <Flex justify="center" pt={20}>
+                <Loader variant="bars" />
+              </Flex>
+            ) : (
+              <Grid>
+                {messages.length ? (
+                  messages.map((message) => (
+                    <Grid.Col lg={3} key={message.id}>
+                      <Box
+                        p={10}
+                        style={{
+                          border: "1px solid white",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        {/* <div>{message.author.username}</div> */}
+                        <div>{message.content}</div>
+                      </Box>
+                    </Grid.Col>
+                  ))
+                ) : (
+                  <div>There are no messages</div>
+                )}
+              </Grid>
+            )}
+          </PageContent>
+        </DisplayBorders>
+
+        {/* <RandomNumbersDisplay /> */}
+        <BackgroundImageOverlay />
+      </HomeContainer>
+
+      <Pointer isHovered={isHovered} />
+    </div>
+
+    // <Container>
+    //   <NavBar />
+    //   <h1>Dashboard</h1>
+    //   <h2>Messages</h2>
+    //   <Flex columnGap={10} mb={20}>
+    //     <Button
+    //       variant={selectedLevel === RoleNames.TRYOUT ? "filled" : "outline"}
+    //       onClick={() => setSelectedLevel(RoleNames.TRYOUT)}
+    //     >
+    //       Tryout
+    //     </Button>
+    //     <Button
+    //       variant={selectedLevel === RoleNames.ACADEMY ? "filled" : "outline"}
+    //       onClick={() => setSelectedLevel(RoleNames.ACADEMY)}
+    //     >
+    //       Academy
+    //     </Button>
+    //     <Button
+    //       variant={
+    //         selectedLevel === RoleNames.FIRST_TEAM ? "filled" : "outline"
+    //       }
+    //       onClick={() => setSelectedLevel(RoleNames.FIRST_TEAM)}
+    //     >
+    //       First team
+    //     </Button>
+    //     <Button
+    //       variant={selectedLevel === RoleNames.LEGEND ? "filled" : "outline"}
+    //       onClick={() => setSelectedLevel(RoleNames.LEGEND)}
+    //     >
+    //       Legends
+    //     </Button>
+    //   </Flex>
+    //   {loading ? (
+    //     <Flex justify="center" pt={20}>
+    //       <Loader variant="bars" />
+    //     </Flex>
+    //   ) : (
+    //     <Grid>
+    //       {messages.length ? (
+    //         messages.map((message) => (
+    //           <Grid.Col lg={3} key={message.id}>
+    //             <Box
+    //               p={10}
+    //               style={{ border: "1px solid white", borderRadius: "5px" }}
+    //             >
+    //               {/* <div>{message.author.username}</div> */}
+    //               <div>{message.content}</div>
+    //             </Box>
+    //           </Grid.Col>
+    //         ))
+    //       ) : (
+    //         <div>There are no messages</div>
+    //       )}
+    //     </Grid>
+    //   )}
+    // </Container>
   );
 }
 
