@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import NavBar from "../Home/components/Navbar";
-import axios from "@/utils/axios";
-import { Box, Button, Container, Flex, Grid, Loader } from "@mantine/core";
-import { useUserAuth } from "@/hooks/useUserAuth";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { HomeContainer } from "../Home";
-import ScreenOverlay from "../Home/components/ScreenOverlay";
-import DisplayBorders from "../Home/components/DisplayBorders";
-import PhaseLabel from "../Home/components/PhaseLabel";
-import HomeNav from "../Home/components/HomeNav";
-import { PageContent } from "../Community";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
+import PageContent from "@/components/PageContent";
 import PageTitle from "@/components/PageTitle";
-import BackgroundImageOverlay from "../Community/BackgroundImageOverlay";
+import { useUserAuth } from "@/hooks/useUserAuth";
+import axios from "@/utils/axios";
+import { Box, Button, Flex, Grid, Loader } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import BackgroundImageOverlay from "../../components/BackgroundImageOverlay";
+import { HomeContainer } from "../Home";
+import DisplayBorders from "../Home/components/DisplayBorders";
+import HomeNav from "../Home/components/HomeNav";
+import PhaseLabel from "../Home/components/PhaseLabel";
 import Pointer from "../Home/components/Pointer/Pointer";
+import ScreenOverlay from "../Home/components/ScreenOverlay";
 
 enum RoleNames {
   TRYOUT = "tryout",

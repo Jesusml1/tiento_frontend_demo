@@ -3,57 +3,9 @@ import styled from "@emotion/styled";
 import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
+import MessagesSection from "./MessagesSection";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-
-// const discordMessages = [
-//   {
-//     id: "1",
-//     username: "nerdyraver",
-//     datetime: "11/15/2023, 1:32 PM",
-//     content:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-//   },
-//   {
-//     id: "2",
-//     username: "Collab.Land",
-//     datetime: "11/15/2023, 1:32 PM",
-//     content:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-//   },
-//   {
-//     id: "3",
-//     username: "Jesusml1",
-//     datetime: "11/15/2023, 1:32 PM",
-//     content:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-//   },
-// ];
-
-const MessagesSection = styled.div`
-  background: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  max-width: 30vw;
-  overflow-y: scroll;
-  border: 1px solid rgba(33, 150, 243, 0.15);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  flex-basis: 100%;
-
-  @media (max-width: 1024px) {
-    max-width: none;
-    margin-left: 20px;
-    margin-right: 20px;
-    min-height: 350px;
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
 
 const DiscordMessageCard = styled.div`
   background: rgba(54, 169, 192, 0.2);

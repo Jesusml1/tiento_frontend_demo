@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ReactComponent as TwitterLogo } from "@/assets/twitter.svg";
+import MessagesSection from "./MessagesSection";
 
 const twitterPosts = [
   {
@@ -25,31 +26,6 @@ const twitterPosts = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 ];
-
-const MessagesSection = styled.div`
-  background: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  max-width: 30vw;
-  overflow-y: scroll;
-  border: 1px solid rgba(33, 150, 243, 0.15);
-  position: relative;
-  display: flex; 
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  flex-basis: 100%;
-
-  @media (max-width: 1024px) {
-    max-width: none;
-    margin-left: 20px;
-    margin-right: 20px;
-    min-height: 350px;
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
 
 const TwitterPostCard = styled.div`
   background: rgba(54, 169, 192, 0.2);

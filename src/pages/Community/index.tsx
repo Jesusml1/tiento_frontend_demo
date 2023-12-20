@@ -8,22 +8,11 @@ import HomeNav from "../Home/components/HomeNav";
 import PhaseLabel from "../Home/components/PhaseLabel";
 import Pointer from "../Home/components/Pointer/Pointer";
 import ScreenOverlay from "../Home/components/ScreenOverlay";
-import BackgroundImageOverlay from "./BackgroundImageOverlay";
-import DiscordMessages from "./DiscordMessages";
-import InstagramMessages from "./InstagramPosts";
-import XPosts from "./TwitterPosts";
-import { keyframes } from "@emotion/react";
-
-export const PageContent = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  animation: ${keyframes`
-    0% { opacity: 0 }
-    50% {opacity: 0 }
-    100% { opacity: 1 }
-  `} 2s ease-in-out;
-`;
+import BackgroundImageOverlay from "../../components/BackgroundImageOverlay";
+import DiscordMessages from "./components/DiscordMessages";
+import InstagramMessages from "./components/InstagramPosts";
+import TwitterPosts from "./components/TwitterPosts";
+import PageContent from "@/components/PageContent";
 
 const CardsContainer = styled.div`
   display: flex;
@@ -53,7 +42,7 @@ function Community() {
             <CardsContainer>
               <DiscordMessages />
               <InstagramMessages />
-              <XPosts />
+              <TwitterPosts />
             </CardsContainer>
           </PageContent>
         </DisplayBorders>
