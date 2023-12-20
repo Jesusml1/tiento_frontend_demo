@@ -4,29 +4,31 @@ import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
 
-const discordMessages = [
-  {
-    id: "1",
-    username: "nerdyraver",
-    datetime: "11/15/2023, 1:32 PM",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    id: "2",
-    username: "Collab.Land",
-    datetime: "11/15/2023, 1:32 PM",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    id: "3",
-    username: "Jesusml1",
-    datetime: "11/15/2023, 1:32 PM",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-];
+const apiUrl = import.meta.env.VITE_API_URL;
+
+// const discordMessages = [
+//   {
+//     id: "1",
+//     username: "nerdyraver",
+//     datetime: "11/15/2023, 1:32 PM",
+//     content:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//   },
+//   {
+//     id: "2",
+//     username: "Collab.Land",
+//     datetime: "11/15/2023, 1:32 PM",
+//     content:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+//   },
+//   {
+//     id: "3",
+//     username: "Jesusml1",
+//     datetime: "11/15/2023, 1:32 PM",
+//     content:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//   },
+// ];
 
 const MessagesSection = styled.div`
   background: rgba(255, 255, 255, 0.2);
@@ -113,17 +115,21 @@ const BottomRightCorner = styled.div`
   border-bottom: ${cornerBorderProps};
 `;
 
-
 interface DiscordMessage {
   author: string;
   content: string;
   date: string;
 }
 
-async function fetchMessages() {
+interface DiscordUser {
+  id: string;
+  username: string;
+}
+
+async function fetchMessages(discordUser: DiscordUser) {
   try {
     const response = await axios.post("/api/community/discord", {
-      username: "jesusml1",
+      username: discordUser.username,
     });
     if (response.status === 200) {
       return response.data.data;
@@ -138,14 +144,23 @@ async function fetchMessages() {
 function DiscordMessages() {
   const [loading, setLoading] = useState<boolean>(false);
   const [messages, setMessages] = useState<Array<DiscordMessage>>([]);
+  const [noUser, setNoUser] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true);
-    fetchMessages()
-      .then(setMessages)
-      .finally(() => {
-        setLoading(false);
-      });
+    const discordUserStr = localStorage.getItem("discord_user_info");
+    if (discordUserStr !== null) {
+      const discordUser: DiscordUser = JSON.parse(discordUserStr);
+      if (discordUser !== null) {
+        setLoading(true);
+        fetchMessages(discordUser)
+          .then(setMessages)
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    } else {
+      setNoUser(true);
+    }
   }, []);
 
   return (
@@ -158,6 +173,9 @@ function DiscordMessages() {
         <DiscordLogo width={80} height={80} />
       </a>
       {loading && <div>Loading...</div>}
+      {noUser && (
+        <a href={`${apiUrl}/api/auth/discord`} style={{color: 'white'}}>Connect with discord</a>
+      )}
       {messages.map((message, i) => (
         <DiscordMessageCard key={i}>
           <DiscordMessageUser>{message.author}</DiscordMessageUser>
