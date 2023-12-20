@@ -113,6 +113,7 @@ const BottomRightCorner = styled.div`
   border-bottom: ${cornerBorderProps};
 `;
 
+
 interface DiscordMessage {
   author: string;
   content: string;
@@ -153,9 +154,9 @@ function DiscordMessages() {
       <TopRightCorner />
       <BottomLeftCorner />
       <BottomRightCorner /> */}
-      <div>
+      <a href="#">
         <DiscordLogo width={80} height={80} />
-      </div>
+      </a>
       {loading && <div>Loading...</div>}
       {messages.map((message, i) => (
         <DiscordMessageCard key={i}>

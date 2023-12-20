@@ -117,9 +117,9 @@ function XPosts() {
       <TopRightCorner />
       <BottomLeftCorner />
       <BottomRightCorner /> */}
-      <div>
+      <a href="#">
         <TwitterLogo width={80} height={80} />
-      </div>
+      </a>
       {twitterPosts.map((post) => (
         <TwitterPostCard key={post.id}>
           <TwitterPostUser>{post.username}</TwitterPostUser>

@@ -165,9 +165,9 @@ function InstagramMessages() {
       <TopRightCorner />
       <BottomLeftCorner />
       <BottomRightCorner /> */}
-      <div>
+      <a href="https://www.instagram.com/tientosportsmanagement/" target="_blank">
         <InstagramLogo width={80} height={80} />
-      </div>
+      </a>
       {loading && <div>Loading...</div>}
       {posts.length > 0
         ? posts.map((post) => (
