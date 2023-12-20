@@ -44,6 +44,48 @@ function HomeNav({
       <NavButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        href="/community"
+      >
+        COMMUNITY
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        PROYECT
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        DOCUMENT
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        EVENTS
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        MERCH
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        ABOUT
+      </NavButton>
+      {/* <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         href="#"
       >
         DOCS
@@ -71,7 +113,7 @@ function HomeNav({
         target="_blank"
       >
         TWITTER
-      </NavButton>
+      </NavButton> */}
     </NavContainer>
   );
 }

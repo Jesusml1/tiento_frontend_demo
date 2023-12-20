@@ -11,6 +11,7 @@ import { Notifications } from "@mantine/notifications";
 import AppShellDemo from "./pages/Appshell";
 import { CustomFonts } from "./Layout/CustomFonts";
 import { useUserAuth } from "./hooks/useUserAuth";
+import Community from "./pages/Community";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             }
           />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="community" element={<Community />} />
           <Route path="appshell" element={<AppShellDemo />} />
           <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="banned" element={<Banned />} />
