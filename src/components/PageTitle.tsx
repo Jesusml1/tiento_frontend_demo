@@ -9,8 +9,8 @@ const PageTitleContainer = styled.div`
   font-family: 'IBM Plex Mono', monospace;
   margin-bottom: 20px;
   /* width: max-content; */
-  min-width: 30vw;
-  height: 96px;
+  min-width: 30%;
+  height: 69px;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   justify-content: center;
