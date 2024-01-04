@@ -37,7 +37,6 @@ function Community() {
           <PhaseLabel setIsHovered={setIsHovered} />
           <HomeNav setIsHovered={setIsHovered} />
           <PageContent>
-            <TientoLogo width={150} height={150} />
             <PageTitle>COMMUNITY</PageTitle>
             <CardsContainer>
               <DiscordMessages />
