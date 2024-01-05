@@ -13,7 +13,7 @@ import BackgroundVideoOverlay from "./components/BackgroundVideoOverlay";
 
 const generalBackgroundColor = "rgb(20, 20, 20)";
 
-const HomeContainer = styled.div`
+export const HomeContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${generalBackgroundColor};

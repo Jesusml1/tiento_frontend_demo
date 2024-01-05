@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
+import { useUserAuth } from "@/hooks/useUserAuth";
 
 const NavContainer = styled.div`
   position: absolute;
@@ -39,39 +40,62 @@ function HomeNav({
 }: {
   setIsHovered: (isHovered: boolean) => void;
 }) {
+  const { handleLogout, user } = useUserAuth();
+
   return (
     <NavContainer>
       <NavButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        href="/community"
+      >
+        COMMUNITY
+      </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         href="#"
       >
-        DOCS
+        PROYECT
       </NavButton>
       <NavButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        href="https://discord.gg/t47WVQUd"
-        target="_blank"
+        href="#"
       >
-        DISCORD
+        DOCUMENT
       </NavButton>
       <NavButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        href="https://instagram.com/tientonft"
-        target="_blank"
+        href="#"
       >
-        INSTAGRAM
+        EVENTS
       </NavButton>
       <NavButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        href="https://twitter.com/nerdyraverr"
-        target="_blank"
+        href="#"
       >
-        TWITTER
+        MERCH
       </NavButton>
+      <NavButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        href="#"
+      >
+        ABOUT
+      </NavButton>
+      {user && (
+        <NavButton
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          href="#"
+          onClick={handleLogout}
+        >
+          LOGOUT
+        </NavButton>
+      )}
     </NavContainer>
   );
 }
