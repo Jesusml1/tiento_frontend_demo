@@ -49,7 +49,7 @@ export interface DiscordMessage {
   author: string;
   content: string;
   date: string;
-  channelName: string;
+  channel_name: string;
 }
 
 interface DiscordUser {
@@ -113,7 +113,7 @@ function DiscordMessages() {
               <Flex justify="space-between" align="center">
                 <DiscordMessageUser>{message.author}</DiscordMessageUser>
                 <DiscordMessageChannelName>
-                  {message.channelName ?? "announcement"}
+                  {message.channel_name}
                 </DiscordMessageChannelName>
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
