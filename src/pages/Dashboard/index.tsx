@@ -74,7 +74,7 @@ function Dashboard() {
           <HomeNav setIsHovered={setIsHovered} />
           <PageContent>
             <TientoLogo width={150} height={150} />
-            <PageTitle>Messages</PageTitle>
+            {/* <PageTitle>Messages</PageTitle>
 
             <Flex columnGap={10} mb={20}>
               <Button
@@ -126,7 +126,7 @@ function Dashboard() {
                           borderRadius: "5px",
                         }}
                       >
-                        {/* <div>{message.author.username}</div> */}
+                        <div>{message.author.username}</div>
                         <div>{message.content}</div>
                       </Box>
                     </Grid.Col>
@@ -135,7 +135,7 @@ function Dashboard() {
                   <div>There are no messages</div>
                 )}
               </Grid>
-            )}
+            )} */}
           </PageContent>
         </DisplayBorders>
 
