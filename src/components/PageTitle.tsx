@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 const PageTitleContainer = styled.div`
   padding: 20px;
   border: 1px solid rgba(33, 150, 243, 0.15);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 400;
   font-family: 'IBM Plex Mono', monospace;
   margin-bottom: 20px;
@@ -20,8 +20,8 @@ const PageTitleContainer = styled.div`
 
 const borderSharedStyles = css`
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
 `;
 
 const cornerBorderProps = "1px solid white";

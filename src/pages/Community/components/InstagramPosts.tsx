@@ -3,7 +3,12 @@ import styled from "@emotion/styled";
 import { ReactComponent as InstagramLogo } from "@/assets/instagram.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-import MessagesSection from "./MessagesSection";
+import instagramPosts from "@/data/mockInstagramPosts";
+import TabName from "./TabName";
+import Container from "./Container";
+import ScrollView from "./ScrollView";
+
+const InstagramPosts = styled.div``;
 
 const InstagramMessageCard = styled.div`
   background: rgba(54, 169, 192, 0.2);
@@ -11,7 +16,7 @@ const InstagramMessageCard = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: 20px;
 `;
 
 const InstagramImage = styled.img`
@@ -21,46 +26,12 @@ const InstagramImage = styled.img`
   aspect-ratio: 1 / 1;
 `;
 
-const borderSharedStyles = css`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-`;
-
-const cornerBorderProps = "1px solid white";
-
-const TopLeftCorner = styled.div`
-  ${borderSharedStyles}
-  top: 0;
-  left: 0;
-  border-top: ${cornerBorderProps};
-  border-left: ${cornerBorderProps};
-`;
-const TopRightCorner = styled.div`
-  ${borderSharedStyles}
-  top: 0;
-  right: 0;
-  border-top: ${cornerBorderProps};
-  border-right: ${cornerBorderProps};
-`;
-const BottomLeftCorner = styled.div`
-  ${borderSharedStyles}
-  bottom: 0;
-  left: 0;
-  border-left: ${cornerBorderProps};
-  border-bottom: ${cornerBorderProps};
-`;
-const BottomRightCorner = styled.div`
-  ${borderSharedStyles}
-  bottom: 0;
-  right: 0;
-  border-right: ${cornerBorderProps};
-  border-bottom: ${cornerBorderProps};
-`;
+const InstagramPostDescription = styled.div``;
 
 interface Post {
   id: string;
   imageUrl: string;
+  description: string;
 }
 
 async function fetchPosts() {
@@ -74,6 +45,7 @@ async function fetchPosts() {
         results.push({
           id: i.toString(),
           imageUrl: posts[i],
+          description: "",
         });
       }
       return results;
@@ -87,35 +59,38 @@ async function fetchPosts() {
 
 function InstagramMessages() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [posts, setPosts] = useState<Array<Post>>(instagramPosts);
 
-  useEffect(() => {
-    setLoading(true);
-    fetchPosts()
-      .then(setPosts)
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetchPosts()
+  //     .then(setPosts)
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   return (
-    <MessagesSection>
-      {/* <TopLeftCorner />
-      <TopRightCorner />
-      <BottomLeftCorner />
-      <BottomRightCorner /> */}
-      <a href="https://www.instagram.com/tientosportsmanagement/" target="_blank">
-        <InstagramLogo width={80} height={80} />
-      </a>
-      {loading && <div>Loading...</div>}
-      {posts.length > 0
-        ? posts.map((post) => (
-            <InstagramMessageCard key={post.id}>
-              <InstagramImage src={post.imageUrl} />
-            </InstagramMessageCard>
-          ))
-        : ""}
-    </MessagesSection>
+    <Container>
+      <TabName>
+        <InstagramLogo width={35} height={35} />
+      </TabName>
+      <ScrollView>
+        <InstagramPosts>
+          {loading && <div>Loading...</div>}
+          {posts.length > 0
+            ? posts.map((post) => (
+                <InstagramMessageCard key={post.id}>
+                  <InstagramImage src={post.imageUrl} />
+                  <InstagramPostDescription>
+                    {post.description}
+                  </InstagramPostDescription>
+                </InstagramMessageCard>
+              ))
+            : ""}
+        </InstagramPosts>
+      </ScrollView>
+    </Container>
   );
 }
 

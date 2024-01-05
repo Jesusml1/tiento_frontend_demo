@@ -46,7 +46,6 @@ function Community() {
           </PageContent>
         </DisplayBorders>
 
-        {/* <RandomNumbersDisplay /> */}
         <BackgroundImageOverlay />
       </HomeContainer>
 
