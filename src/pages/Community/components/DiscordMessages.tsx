@@ -42,6 +42,7 @@ const DiscordMessageChannelName = styled.div`
   border: 1px solid white;
   font-size: 10;
   text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
 `;
 
 export interface DiscordMessage {
