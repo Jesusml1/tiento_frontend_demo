@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-import MessagesSection from "./MessagesSection";
 import mockDiscordMessages from "@/data/mockDiscordMessages";
 import TabName from "./TabName";
 import { Flex } from "@mantine/core";
