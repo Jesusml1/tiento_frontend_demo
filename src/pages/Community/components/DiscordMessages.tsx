@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-import mockDiscordMessages from "@/data/mockDiscordMessages";
+// import mockDiscordMessages from "@/data/mockDiscordMessages";
 import TabName from "./TabName";
 import { Flex } from "@mantine/core";
 import Container from "./Container";
@@ -34,6 +34,7 @@ const DiscordMessageDateTime = styled.div`
 
 const DiscordMessageContent = styled.div`
   font-size: 14px;
+  word-break: break-word;
 `;
 
 const DiscordMessageChannelName = styled.div`
@@ -74,25 +75,25 @@ async function fetchMessages(discordUser: DiscordUser) {
 function DiscordMessages() {
   const [loading, setLoading] = useState<boolean>(false);
   const [messages, setMessages] =
-    useState<Array<DiscordMessage>>(mockDiscordMessages);
+    useState<Array<DiscordMessage>>([]);
   const [noUser, setNoUser] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   const discordUserStr = localStorage.getItem("discord_user_info");
-  //   if (discordUserStr !== null) {
-  //     const discordUser: DiscordUser = JSON.parse(discordUserStr);
-  //     if (discordUser !== null) {
-  //       setLoading(true);
-  //       fetchMessages(discordUser)
-  //         .then(setMessages)
-  //         .finally(() => {
-  //           setLoading(false);
-  //         });
-  //     }
-  //   } else {
-  //     setNoUser(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const discordUserStr = localStorage.getItem("discord_user_info");
+    if (discordUserStr !== null) {
+      const discordUser: DiscordUser = JSON.parse(discordUserStr);
+      if (discordUser !== null) {
+        setLoading(true);
+        fetchMessages(discordUser)
+          .then(setMessages)
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    } else {
+      setNoUser(true);
+    }
+  }, []);
 
   return (
     <Container>
@@ -112,7 +113,7 @@ function DiscordMessages() {
               <Flex justify="space-between" align="center">
                 <DiscordMessageUser>{message.author}</DiscordMessageUser>
                 <DiscordMessageChannelName>
-                  {message.channelName}
+                  {message.channelName ?? "announcement"}
                 </DiscordMessageChannelName>
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
