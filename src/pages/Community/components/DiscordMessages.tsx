@@ -32,9 +32,12 @@ const DiscordMessageDateTime = styled.div`
   color: rgba(224, 224, 224);
 `;
 
-const DiscordMessageContent = styled.div`
+const DiscordMessageContent = styled.p`
   font-size: 14px;
   word-break: break-word;
+  width: inherit;
+  word-wrap: normal;
+  white-space: pre-wrap;
 `;
 
 const DiscordMessageChannelName = styled.div`
