@@ -75,10 +75,16 @@ async function fetchMessages(discordUser: DiscordUser) {
   }
 }
 
+function formatMessageContent(message: string): string {
+  if (message.length > 300) {
+    return message.slice(0, 300) + "... keep reading on discord";
+  }
+  return message;
+}
+
 function DiscordMessages() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [messages, setMessages] =
-    useState<Array<DiscordMessage>>([]);
+  const [messages, setMessages] = useState<Array<DiscordMessage>>([]);
   const [noUser, setNoUser] = useState<boolean>(false);
 
   useEffect(() => {
@@ -120,7 +126,7 @@ function DiscordMessages() {
                 </DiscordMessageChannelName>
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
-              <DiscordMessageContent>{message.content}</DiscordMessageContent>
+              <DiscordMessageContent>{formatMessageContent(message.content)}</DiscordMessageContent>
             </DiscordMessageCard>
           ))}
         </DiscordMessagesContainer>
