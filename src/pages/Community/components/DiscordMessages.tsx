@@ -48,11 +48,28 @@ const DiscordMessageChannelName = styled.div`
   background: rgba(255, 255, 255, 0.1);
 `;
 
+const DiscordAttachmentImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+`
+
+export interface DiscordAttachment {
+  id: string;
+  filename: string;
+  size: number;
+  url: string;
+  proxy_url: string;
+  width: number;
+  height: number;
+}
+
 export interface DiscordMessage {
   author: string;
   content: string;
   date: string;
   channel_name: string;
+  attachment: Array<DiscordAttachment>;
 }
 
 interface DiscordUser {
@@ -76,7 +93,7 @@ async function fetchMessages(discordUser: DiscordUser) {
 }
 
 function formatMessageContent(message: string): string {
-  if (message.length > 300) {
+  if (message.length > 299) {
     return message.slice(0, 300) + "... keep reading on discord";
   }
   return message;
@@ -129,6 +146,17 @@ function DiscordMessages() {
               <DiscordMessageContent>
                 {formatMessageContent(message.content)}
               </DiscordMessageContent>
+              <div>
+                {message.attachment.map((att) => (
+                  <DiscordAttachmentImage
+                    key={att.id}
+                    alt={att.filename}
+                    height={att.height}
+                    width={att.width}
+                    src={att.url}
+                  />
+                ))}
+              </div>
             </DiscordMessageCard>
           ))}
         </DiscordMessagesContainer>
