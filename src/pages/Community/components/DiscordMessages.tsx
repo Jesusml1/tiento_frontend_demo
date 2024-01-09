@@ -14,7 +14,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const DiscordMessagesContainer = styled.div``;
 
 const DiscordMessageCard = styled.div`
-  background: rgba(54, 169, 192, 0.2);
+  background: rgba(98, 92, 241, 0.5);
   width: 100%;
   padding: 20px;
   margin-bottom: 20px;
@@ -33,7 +33,7 @@ const DiscordMessageDateTime = styled.div`
 `;
 
 const DiscordMessageContent = styled.p`
-  font-size: 14px;
+  font-size: 1rem;
   word-break: break-word;
   width: inherit;
   word-wrap: normal;
@@ -106,10 +106,10 @@ function DiscordMessages() {
 
   return (
     <Container>
-      <TabName>
+      <TabName bgColor="rgba(98, 92, 241, 0.3)">
         <DiscordLogo width={35} height={35} />
       </TabName>
-      <ScrollView>
+      <ScrollView bgColor="rgba(98, 92, 241, 0.3)">
         {loading && <div>Loading...</div>}
         {noUser && (
           <a href={`${apiUrl}/api/auth/discord`} style={{ color: "white" }}>
@@ -126,7 +126,9 @@ function DiscordMessages() {
                 </DiscordMessageChannelName>
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
-              <DiscordMessageContent>{formatMessageContent(message.content)}</DiscordMessageContent>
+              <DiscordMessageContent>
+                {formatMessageContent(message.content)}
+              </DiscordMessageContent>
             </DiscordMessageCard>
           ))}
         </DiscordMessagesContainer>

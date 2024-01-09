@@ -11,7 +11,7 @@ import ScrollView from "./ScrollView";
 const InstagramPosts = styled.div``;
 
 const InstagramMessageCard = styled.div`
-  background: rgba(54, 169, 192, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
@@ -26,7 +26,9 @@ const InstagramImage = styled.img`
   aspect-ratio: 1 / 1;
 `;
 
-const InstagramPostDescription = styled.div``;
+const InstagramPostDescription = styled.div`
+  font-size: 1rem;
+`;
 
 interface Post {
   id: string;
@@ -72,10 +74,10 @@ function InstagramMessages() {
 
   return (
     <Container>
-      <TabName>
+      <TabName bgColor="rgba(255, 255, 255, 0.3)">
         <InstagramLogo width={35} height={35} />
       </TabName>
-      <ScrollView>
+      <ScrollView bgColor="rgba(255, 255, 255, 0.3)">
         <InstagramPosts>
           {loading && <div>Loading...</div>}
           {posts.length > 0
