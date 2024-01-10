@@ -13,6 +13,7 @@ import HomeNav from "../Home/components/HomeNav";
 import PhaseLabel from "../Home/components/PhaseLabel";
 import Pointer from "../Home/components/Pointer/Pointer";
 import ScreenOverlay from "../Home/components/ScreenOverlay";
+import MobileMenuOverlay from "@/components/MobileMenuOverlay";
 
 enum RoleNames {
   TRYOUT = "tryout",
@@ -34,6 +35,7 @@ function Dashboard() {
   const [selectedLevel, setSelectedLevel] = useState("");
   const { user } = useUserAuth();
   const [isHovered, setIsHovered] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   function fetchMessages() {
     setLoading(true);
@@ -66,15 +68,21 @@ function Dashboard() {
 
   return (
     <div>
-      <HomeContainer>
-        <ScreenOverlay />
+      {showMobileMenu ? (
+        <MobileMenuOverlay setShowMobileMenu={setShowMobileMenu} />
+      ) : (
+        <HomeContainer>
+          <ScreenOverlay />
 
-        <DisplayBorders>
-          <PhaseLabel setIsHovered={setIsHovered} />
-          <HomeNav setIsHovered={setIsHovered} />
-          <PageContent>
-            <TientoLogo width={150} height={150} />
-            {/* <PageTitle>Messages</PageTitle>
+          <DisplayBorders>
+            <PhaseLabel
+              setShowMobileMenu={setShowMobileMenu}
+              setIsHovered={setIsHovered}
+            />
+            <HomeNav setIsHovered={setIsHovered} />
+            <PageContent>
+              <TientoLogo width={150} height={150} />
+              {/* <PageTitle>Messages</PageTitle>
 
             <Flex columnGap={10} mb={20}>
               <Button
@@ -136,12 +144,13 @@ function Dashboard() {
                 )}
               </Grid>
             )} */}
-          </PageContent>
-        </DisplayBorders>
+            </PageContent>
+          </DisplayBorders>
 
-        {/* <RandomNumbersDisplay /> */}
-        <BackgroundImageOverlay />
-      </HomeContainer>
+          {/* <RandomNumbersDisplay /> */}
+          <BackgroundImageOverlay />
+        </HomeContainer>
+      )}
 
       <Pointer isHovered={isHovered} />
     </div>

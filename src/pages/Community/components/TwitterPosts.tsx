@@ -8,7 +8,7 @@ import Container from "./Container";
 const TwitterPosts = styled.div``;
 
 const TwitterPostCard = styled.div`
-  background: rgba(54, 169, 192, 0.2);
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
@@ -26,17 +26,17 @@ const TwitterPostDateTime = styled.div`
 `;
 
 const TwitterPostContent = styled.div`
-  font-size: 14px;
+  font-size: 1rem;
 `;
 
 function XPosts() {
   return (
     <Container>
-      <TabName>
+      <TabName bgColor="rgba(0, 0, 0, 0.3)">
         <TwitterLogo width={35} height={35} />
       </TabName>
 
-      <ScrollView>
+      <ScrollView bgColor="rgba(0, 0, 0, 0.3)">
         <TwitterPosts>
           {twitterPosts.map((post) => (
             <TwitterPostCard key={post.id}>

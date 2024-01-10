@@ -14,7 +14,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const DiscordMessagesContainer = styled.div``;
 
 const DiscordMessageCard = styled.div`
-  background: rgba(54, 169, 192, 0.2);
+  background: rgba(98, 92, 241, 0.5);
   width: 100%;
   padding: 20px;
   margin-bottom: 20px;
@@ -32,9 +32,12 @@ const DiscordMessageDateTime = styled.div`
   color: rgba(224, 224, 224);
 `;
 
-const DiscordMessageContent = styled.div`
-  font-size: 14px;
+const DiscordMessageContent = styled.p`
+  font-size: 1rem;
   word-break: break-word;
+  width: inherit;
+  word-wrap: normal;
+  white-space: pre-wrap;
 `;
 
 const DiscordMessageChannelName = styled.div`
@@ -45,11 +48,28 @@ const DiscordMessageChannelName = styled.div`
   background: rgba(255, 255, 255, 0.1);
 `;
 
+const DiscordAttachmentImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+`
+
+export interface DiscordAttachment {
+  id: string;
+  filename: string;
+  size: number;
+  url: string;
+  proxy_url: string;
+  width: number;
+  height: number;
+}
+
 export interface DiscordMessage {
   author: string;
   content: string;
   date: string;
   channel_name: string;
+  attachment: Array<DiscordAttachment>;
 }
 
 interface DiscordUser {
@@ -72,10 +92,16 @@ async function fetchMessages(discordUser: DiscordUser) {
   }
 }
 
+function formatMessageContent(message: string): string {
+  if (message.length > 299) {
+    return message.slice(0, 300) + "... keep reading on discord";
+  }
+  return message;
+}
+
 function DiscordMessages() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [messages, setMessages] =
-    useState<Array<DiscordMessage>>([]);
+  const [messages, setMessages] = useState<Array<DiscordMessage>>([]);
   const [noUser, setNoUser] = useState<boolean>(false);
 
   useEffect(() => {
@@ -97,10 +123,10 @@ function DiscordMessages() {
 
   return (
     <Container>
-      <TabName>
+      <TabName bgColor="rgba(98, 92, 241, 0.3)">
         <DiscordLogo width={35} height={35} />
       </TabName>
-      <ScrollView>
+      <ScrollView bgColor="rgba(98, 92, 241, 0.3)">
         {loading && <div>Loading...</div>}
         {noUser && (
           <a href={`${apiUrl}/api/auth/discord`} style={{ color: "white" }}>
@@ -117,7 +143,20 @@ function DiscordMessages() {
                 </DiscordMessageChannelName>
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
-              <DiscordMessageContent>{message.content}</DiscordMessageContent>
+              <DiscordMessageContent>
+                {formatMessageContent(message.content)}
+              </DiscordMessageContent>
+              <div>
+                {message.attachment.map((att) => (
+                  <DiscordAttachmentImage
+                    key={att.id}
+                    alt={att.filename}
+                    height={att.height}
+                    width={att.width}
+                    src={att.url}
+                  />
+                ))}
+              </div>
             </DiscordMessageCard>
           ))}
         </DiscordMessagesContainer>
