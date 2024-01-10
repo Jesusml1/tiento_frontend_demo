@@ -13,6 +13,7 @@ import DiscordMessages from "./components/DiscordMessages";
 import InstagramMessages from "./components/InstagramPosts";
 import TwitterPosts from "./components/TwitterPosts";
 import PageContent from "@/components/PageContent";
+import MobileMenuOverlay from "@/components/MobileMenuOverlay";
 
 const CardsContainer = styled.div`
   display: flex;
@@ -27,28 +28,35 @@ const CardsContainer = styled.div`
 
 function Community() {
   const [isHovered, setIsHovered] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <div>
-      <HomeContainer>
-        <ScreenOverlay />
+      {showMobileMenu ? (
+        <MobileMenuOverlay setShowMobileMenu={setShowMobileMenu} />
+      ) : (
+        <HomeContainer>
+          <ScreenOverlay />
 
-        <DisplayBorders>
-          <PhaseLabel setIsHovered={setIsHovered} />
-          <HomeNav setIsHovered={setIsHovered} />
-          <PageContent>
-            <PageTitle>COMMUNITY</PageTitle>
-            <CardsContainer>
-              <DiscordMessages />
-              <InstagramMessages />
-              <TwitterPosts />
-            </CardsContainer>
-          </PageContent>
-        </DisplayBorders>
+          <DisplayBorders>
+            <PhaseLabel
+              setShowMobileMenu={setShowMobileMenu}
+              setIsHovered={setIsHovered}
+            />
+            <HomeNav setIsHovered={setIsHovered} />
+            <PageContent>
+              <PageTitle>COMMUNITY</PageTitle>
+              <CardsContainer>
+                <DiscordMessages />
+                <InstagramMessages />
+                <TwitterPosts />
+              </CardsContainer>
+            </PageContent>
+          </DisplayBorders>
 
-        <BackgroundImageOverlay />
-      </HomeContainer>
-
+          <BackgroundImageOverlay />
+        </HomeContainer>
+      )}
       <Pointer isHovered={isHovered} />
     </div>
   );
