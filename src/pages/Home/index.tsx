@@ -15,7 +15,7 @@ const generalBackgroundColor = "rgb(20, 20, 20)";
 
 export const HomeContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${generalBackgroundColor};
   display: flex;
   justify-content: center;

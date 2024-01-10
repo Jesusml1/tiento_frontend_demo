@@ -7,8 +7,8 @@ const borderCornerSize = "20px";
 const borderCornerColor = "rgba(255, 255, 255, 0.727)";
 
 const DisplayContainer = styled.div`
-  width: 97%;
-  height: 95vh;
+  width: 98%;
+  height: 96%;
   border: 1px solid ${borderColor};
   position: relative;
   display: flex;
