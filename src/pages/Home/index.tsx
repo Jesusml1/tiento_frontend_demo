@@ -10,6 +10,7 @@ import TientoInit from "./components/TientoInit";
 import TientoHero from "./components/TientoHero";
 import ScreenOverlay from "./components/ScreenOverlay";
 import BackgroundVideoOverlay from "./components/BackgroundVideoOverlay";
+import MobileMenuOverlay from "@/components/MobileMenuOverlay";
 
 const generalBackgroundColor = "rgb(20, 20, 20)";
 
@@ -28,6 +29,7 @@ export const HomeContainer = styled.div`
 function Home() {
   const [showLanding, setShowLanding] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
@@ -48,24 +50,35 @@ function Home() {
 
   return (
     <div>
-      <HomeContainer>
-        <ScreenOverlay />
+      {showMobileMenu ? (
+        <MobileMenuOverlay
+          setShowMobileMenu={setShowMobileMenu}
+         />
+      ) : (
+        <HomeContainer>
+          <ScreenOverlay />
 
-        <DisplayBorders>
-          {showLanding === false && (
-            <TientoInit
-              handleShowLanding={handleShowLanding}
-              setIsHovered={setIsHovered}
-            />
-          )}
-          {showLanding && <PhaseLabel setIsHovered={setIsHovered} />}
-          {showLanding && <HomeNav setIsHovered={setIsHovered} />}
-          {showLanding && <TientoHero setIsHovered={setIsHovered} />}
-        </DisplayBorders>
+          <DisplayBorders>
+            {showLanding === false && (
+              <TientoInit
+                handleShowLanding={handleShowLanding}
+                setIsHovered={setIsHovered}
+              />
+            )}
+            {showLanding && (
+              <PhaseLabel
+                setIsHovered={setIsHovered}
+                setShowMobileMenu={setShowMobileMenu}
+              />
+            )}
+            {showLanding && <HomeNav setIsHovered={setIsHovered} />}
+            {showLanding && <TientoHero setIsHovered={setIsHovered} />}
+          </DisplayBorders>
 
-        {showLanding && <RandomNumbersDisplay />}
-        {showLanding && <BackgroundVideoOverlay />}
-      </HomeContainer>
+          {showLanding && <RandomNumbersDisplay />}
+          {showLanding && <BackgroundVideoOverlay />}
+        </HomeContainer>
+      )}
 
       <Pointer isHovered={isHovered} />
     </div>

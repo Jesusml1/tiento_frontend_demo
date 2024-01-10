@@ -28,14 +28,23 @@ const PhaseContainer = styled.div`
 const Container = styled.div`
   position: absolute;
   top: 0;
-  left: 100px;
+  left: 0;
+  right: 0;
   display: flex;
+  justify-content: space-between;
+  margin: 0 50px;
+
   column-gap: 1rem;
   animation: ${keyframes`
     0%{opacity: 0;}
     80%{opacity: 0;}
     100%{opacity: 1;}
   `} ${LANDING_ANIMATION_DURATION} ease-in-out;
+
+  @media (max-width: 768px) {
+    left: 100;
+    margin: 0;
+  }
 `;
 
 const Phase = styled.div`
@@ -48,25 +57,49 @@ const Phase = styled.div`
   }
 `;
 
+const ShowMobileMenuBtn = styled.div`
+  padding: 20px;
+  border-top: 1px solid white;
+
+  &:hover {
+    border-color: rgb(156, 247, 250);
+    color: rgb(156, 247, 250);
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 function PhaseLabel({
   setIsHovered,
+  setShowMobileMenu,
 }: {
   setIsHovered: (isHovered: boolean) => void;
+  setShowMobileMenu: (showMobileMenu: boolean) => void;
 }) {
   return (
     <Container>
-      <Phase
+      <div style={{ display: "flex", columnGap: "20px" }}>
+        <Phase
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <TientoLogo width={30} height={30} />
+        </Phase>
+        <Phase
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          PHASE 01
+        </Phase>
+      </div>
+      <ShowMobileMenuBtn
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={() => setShowMobileMenu(true)}
       >
-        <TientoLogo width={30} height={30} />
-      </Phase>
-      <Phase
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        PHASE 01
-      </Phase>
+        MENU
+      </ShowMobileMenuBtn>
     </Container>
   );
 }
