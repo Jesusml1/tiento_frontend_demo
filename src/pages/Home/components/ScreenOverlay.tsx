@@ -7,6 +7,9 @@ const ScreenOverlayContainer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const panOverlay = keyframes`
