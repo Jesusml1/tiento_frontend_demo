@@ -17,6 +17,9 @@ const PointerContainer = styled.div`
   top: 50%;
   translate: -50% -50%;
   animation: ${pointerInit} 300ms ease;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const pointerHover = keyframes`

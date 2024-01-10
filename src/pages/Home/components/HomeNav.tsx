@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
 import { useUserAuth } from "@/hooks/useUserAuth";
+import NavBtn from "@/components/NavButton";
+import pages from "@/data/navLinkPages";
 
 const NavContainer = styled.div`
   position: absolute;
@@ -20,21 +22,6 @@ const NavContainer = styled.div`
   }
 `;
 
-const NavButton = styled.a`
-  background-color: none;
-  padding: 20px;
-  border: none;
-  border-top: 1px solid white;
-  background: none;
-  color: white;
-  text-decoration: none;
-  &:hover {
-    color: rgb(156, 247, 250);
-    border-top: 1px solid rgb(156, 247, 250);
-    cursor: pointer;
-  }
-`;
-
 function HomeNav({
   setIsHovered,
 }: {
@@ -44,57 +31,23 @@ function HomeNav({
 
   return (
     <NavContainer>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="/community"
-      >
-        COMMUNITY
-      </NavButton>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="#"
-      >
-        PROYECT
-      </NavButton>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="#"
-      >
-        DOCUMENT
-      </NavButton>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="#"
-      >
-        EVENTS
-      </NavButton>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="#"
-      >
-        MERCH
-      </NavButton>
-      <NavButton
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        href="#"
-      >
-        ABOUT
-      </NavButton>
+      {pages.map((page) => (
+        <NavBtn
+          key={page.id}
+          name={page.name}
+          href={page.href}
+          description={page.description}
+          setIsHovered={setIsHovered}
+        />
+      ))}
       {user && (
-        <NavButton
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          href="#"
-          onClick={handleLogout}
-        >
-          LOGOUT
-        </NavButton>
+        <NavBtn
+          name="LOGOUT"
+          href="/#"
+          description="Logout"
+          setIsHovered={setIsHovered}
+          handleLogout={handleLogout}
+        />
       )}
     </NavContainer>
   );

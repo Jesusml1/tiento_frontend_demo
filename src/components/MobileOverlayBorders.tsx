@@ -7,11 +7,13 @@ const borderCornerSize = "20px";
 const borderCornerColor = "rgba(255, 255, 255, 0.727)";
 
 const DisplayContainer = styled.div`
-  width: 98%;
+  width: 94%;
   height: 96%;
   border: 1px solid ${borderColor};
   position: relative;
   display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
   justify-content: center;
   align-items: center;
   color: white;
@@ -62,7 +64,7 @@ const DisplayBorderBottomLeft = styled.div`
   border-left: 2px solid ${borderCornerColor};
 `;
 
-function DisplayBorders({ children }: { children: ReactNode }) {
+function MobileOverlayBorders({ children }: { children: ReactNode }) {
   return (
     <DisplayContainer>
       <DisplayBorderTopLeft />
@@ -74,4 +76,4 @@ function DisplayBorders({ children }: { children: ReactNode }) {
   );
 }
 
-export default DisplayBorders;
+export default MobileOverlayBorders;
