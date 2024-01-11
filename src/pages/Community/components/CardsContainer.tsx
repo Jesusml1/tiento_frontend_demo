@@ -6,7 +6,7 @@ const CardsContainer = styled.div`
   max-height: 70vh;
   @media (max-width: 1024px) {
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 80px;
     overflow-y: scroll;
   }
 `;
