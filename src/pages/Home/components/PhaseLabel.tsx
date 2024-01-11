@@ -42,8 +42,8 @@ const Container = styled.div`
   `} ${LANDING_ANIMATION_DURATION} ease-in-out;
 
   @media (max-width: 768px) {
-    left: 100;
-    margin: 0;
+    /* left: 100; */
+    /* margin: 0; */
   }
 `;
 
@@ -55,7 +55,22 @@ const Phase = styled.div`
     border-color: rgb(156, 247, 250);
     color: rgb(156, 247, 250);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
+
+const LogoContainer = styled.div`
+  padding: 20px;
+  border-top: 1px solid white;
+
+  &:hover {
+    border-color: rgb(156, 247, 250);
+    color: rgb(156, 247, 250);
+  }
+ 
+`
 
 const ShowMobileMenuBtn = styled.div`
   padding: 20px;
@@ -80,12 +95,12 @@ function PhaseLabel({
   return (
     <Container>
       <div style={{ display: "flex", columnGap: "20px" }}>
-        <Phase
+        <LogoContainer
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <TientoLogo width={30} height={30} />
-        </Phase>
+        </LogoContainer>
         <Phase
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
