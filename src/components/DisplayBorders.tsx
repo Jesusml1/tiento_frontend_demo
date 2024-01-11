@@ -22,6 +22,10 @@ const DisplayContainer = styled.div`
     50% { width: 97%; height: 100px; }
     100% { width: 97%; height: 95vh; }
   `} 1s ease-in-out;
+
+  @media (max-width: 768px) {
+    width: 94%;
+  }
 `;
 
 const DisplayBorderSharedStyles = css`

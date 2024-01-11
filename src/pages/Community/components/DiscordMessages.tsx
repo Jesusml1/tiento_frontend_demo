@@ -94,7 +94,7 @@ async function fetchMessages(discordUser: DiscordUser) {
 
 function formatMessageContent(message: string): string {
   if (message.length > 299) {
-    return message.slice(0, 300) + "... keep reading on discord";
+    return message.slice(0, 300) + "...💬";
   }
   return message;
 }

@@ -7,11 +7,14 @@ const appear = keyframes`
     100%{opacity: 1;}
 `;
 
-const Container = styled.button`
+const Container = styled.a`
   background: none;
   border: 0.5px solid white;
   padding: 30px 50px;
   min-width: 200px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
   position: relative;
   animation: ${appear} 1500ms ease-in;
 `;
@@ -54,9 +57,15 @@ const BottomRightCorner = styled.div`
   border-right: 2px solid white;
 `;
 
-function MobileMenuBtn({ children }: { children: React.ReactNode }) {
+function MobileMenuBtn({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
-    <Container>
+    <Container href={href}>
       <TopLeftCorner />
       <TopRightCorner />
       <BottomLeftCorner />
