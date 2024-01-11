@@ -7,13 +7,13 @@ import { Box, Button, Flex, Grid, Loader } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import BackgroundImageOverlay from "../../components/BackgroundImageOverlay";
-import { HomeContainer } from "../Home";
 import DisplayBorders from "../Home/components/DisplayBorders";
 import HomeNav from "../Home/components/HomeNav";
 import PhaseLabel from "../Home/components/PhaseLabel";
 import Pointer from "../Home/components/Pointer/Pointer";
 import ScreenOverlay from "../Home/components/ScreenOverlay";
 import MobileMenuOverlay from "@/components/MobileMenuOverlay";
+import MainContainer from "@/components/MainContainer";
 
 enum RoleNames {
   TRYOUT = "tryout",
@@ -71,7 +71,7 @@ function Dashboard() {
       {showMobileMenu ? (
         <MobileMenuOverlay setShowMobileMenu={setShowMobileMenu} />
       ) : (
-        <HomeContainer>
+        <MainContainer>
           <ScreenOverlay />
 
           <DisplayBorders>
@@ -149,7 +149,7 @@ function Dashboard() {
 
           {/* <RandomNumbersDisplay /> */}
           <BackgroundImageOverlay />
-        </HomeContainer>
+        </MainContainer>
       )}
 
       <Pointer isHovered={isHovered} />

@@ -2,7 +2,6 @@ import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import PageTitle from "../../components/PageTitle";
-import { HomeContainer } from "../Home";
 import DisplayBorders from "../Home/components/DisplayBorders";
 import HomeNav from "../Home/components/HomeNav";
 import PhaseLabel from "../Home/components/PhaseLabel";
@@ -14,6 +13,7 @@ import InstagramMessages from "./components/InstagramPosts";
 import TwitterPosts from "./components/TwitterPosts";
 import PageContent from "@/components/PageContent";
 import MobileMenuOverlay from "@/components/MobileMenuOverlay";
+import MainContainer from "@/components/MainContainer";
 
 const CardsContainer = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ function Community() {
       {showMobileMenu ? (
         <MobileMenuOverlay setShowMobileMenu={setShowMobileMenu} />
       ) : (
-        <HomeContainer>
+        <MainContainer>
           <ScreenOverlay />
 
           <DisplayBorders>
@@ -55,7 +55,7 @@ function Community() {
           </DisplayBorders>
 
           <BackgroundImageOverlay />
-        </HomeContainer>
+        </MainContainer>
       )}
       <Pointer isHovered={isHovered} />
     </div>
