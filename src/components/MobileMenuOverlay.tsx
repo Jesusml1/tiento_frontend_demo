@@ -46,12 +46,12 @@ function MobileMenuOverlay({
         <CloseMenuBtn onClick={() => setShowMobileMenu(false)}>
           CLOSE
         </CloseMenuBtn>
-        <MobileMenuBtn>COMMUNITY</MobileMenuBtn>
-        <MobileMenuBtn>PROJECT</MobileMenuBtn>
-        <MobileMenuBtn>DOCUMENT</MobileMenuBtn>
-        <MobileMenuBtn>EVENTS</MobileMenuBtn>
-        <MobileMenuBtn>MERCH</MobileMenuBtn>
-        <MobileMenuBtn>ABOUT</MobileMenuBtn>
+        <MobileMenuBtn href="/community">COMMUNITY</MobileMenuBtn>
+        <MobileMenuBtn href="/project">PROJECT</MobileMenuBtn>
+        <MobileMenuBtn href="/document">DOCUMENT</MobileMenuBtn>
+        <MobileMenuBtn href="/events">EVENTS</MobileMenuBtn>
+        <MobileMenuBtn href="/merch">MERCH</MobileMenuBtn>
+        <MobileMenuBtn href="/about">ABOUT</MobileMenuBtn>
       </MobileOverlayBorders>
     </Container>
   );

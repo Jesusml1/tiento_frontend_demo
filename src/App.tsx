@@ -5,10 +5,8 @@ import NoMatch from "./pages/NoMatch";
 import VerifyEmail from "./pages/Verify";
 import Dashboard from "./pages/Dashboard";
 import Banned from "./pages/Banned";
-import Landing from "./pages/Landing";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import AppShellDemo from "./pages/Appshell";
 import { CustomFonts } from "./Layout/CustomFonts";
 import { useUserAuth } from "./hooks/useUserAuth";
 import Community from "./pages/Community";
@@ -34,10 +32,8 @@ function App() {
           />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="community" element={<Community />} />
-          <Route path="appshell" element={<AppShellDemo />} />
           <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="banned" element={<Banned />} />
-          <Route path="landing" element={<Landing />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>

@@ -1,30 +1,15 @@
-import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-
 import RandomNumbersDisplay from "./components/RandomNumbersDisplay";
 import Pointer from "./components/Pointer/Pointer";
-import DisplayBorders from "./components/DisplayBorders";
-import PhaseLabel from "./components/PhaseLabel";
-import HomeNav from "./components/HomeNav";
+import DisplayBorders from "../../components/DisplayBorders";
+import PhaseLabel from "../../components/PhaseLabel";
+import HomeNav from "../../components/HomeNav";
 import TientoInit from "./components/TientoInit";
 import TientoHero from "./components/TientoHero";
-import ScreenOverlay from "./components/ScreenOverlay";
+import ScreenOverlay from "../../components/ScreenOverlay";
 import BackgroundVideoOverlay from "./components/BackgroundVideoOverlay";
 import MobileMenuOverlay from "@/components/MobileMenuOverlay";
-
-const generalBackgroundColor = "rgb(20, 20, 20)";
-
-export const HomeContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${generalBackgroundColor};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  cursor: crosshair;
-`;
+import MainContainer from "@/components/MainContainer";
 
 function Home() {
   const [showLanding, setShowLanding] = useState(true);
@@ -51,11 +36,9 @@ function Home() {
   return (
     <div>
       {showMobileMenu ? (
-        <MobileMenuOverlay
-          setShowMobileMenu={setShowMobileMenu}
-         />
+        <MobileMenuOverlay setShowMobileMenu={setShowMobileMenu} />
       ) : (
-        <HomeContainer>
+        <MainContainer>
           <ScreenOverlay />
 
           <DisplayBorders>
@@ -77,7 +60,7 @@ function Home() {
 
           {showLanding && <RandomNumbersDisplay />}
           {showLanding && <BackgroundVideoOverlay />}
-        </HomeContainer>
+        </MainContainer>
       )}
 
       <Pointer isHovered={isHovered} />
