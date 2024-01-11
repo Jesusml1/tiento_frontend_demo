@@ -1,14 +1,12 @@
-import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-
 import RandomNumbersDisplay from "./components/RandomNumbersDisplay";
 import Pointer from "./components/Pointer/Pointer";
-import DisplayBorders from "./components/DisplayBorders";
-import PhaseLabel from "./components/PhaseLabel";
-import HomeNav from "./components/HomeNav";
+import DisplayBorders from "../../components/DisplayBorders";
+import PhaseLabel from "../../components/PhaseLabel";
+import HomeNav from "../../components/HomeNav";
 import TientoInit from "./components/TientoInit";
 import TientoHero from "./components/TientoHero";
-import ScreenOverlay from "./components/ScreenOverlay";
+import ScreenOverlay from "../../components/ScreenOverlay";
 import BackgroundVideoOverlay from "./components/BackgroundVideoOverlay";
 import MobileMenuOverlay from "@/components/MobileMenuOverlay";
 import MainContainer from "@/components/MainContainer";
