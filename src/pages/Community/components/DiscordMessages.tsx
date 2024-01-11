@@ -1,9 +1,7 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-// import mockDiscordMessages from "@/data/mockDiscordMessages";
 import TabName from "./TabName";
 import { Flex } from "@mantine/core";
 import Container from "./Container";
@@ -146,7 +144,7 @@ function DiscordMessages() {
               <DiscordMessageContent>
                 {formatMessageContent(message.content)}
               </DiscordMessageContent>
-              <div>
+              <Flex direction="column" rowGap={15}>
                 {message.attachment.map((att) => (
                   <DiscordAttachmentImage
                     key={att.id}
@@ -156,7 +154,7 @@ function DiscordMessages() {
                     src={att.url}
                   />
                 ))}
-              </div>
+              </Flex>
             </DiscordMessageCard>
           ))}
         </DiscordMessagesContainer>
