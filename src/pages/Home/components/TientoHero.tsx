@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import { keyframes } from "@emotion/react";
 import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
+import envVars from "@/config/env";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
 
 const HeroContainer = styled.div`
   display: flex;
@@ -87,7 +88,7 @@ function TientoHero({
       <SignUpButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        href={`${apiUrl}/api/auth/discord`}
+        href={discordApiRedirectUrl}
       >
         <Fill />
         <Corner />

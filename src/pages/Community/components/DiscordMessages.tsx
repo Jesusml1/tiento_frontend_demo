@@ -9,9 +9,9 @@ import { formatLongDiscordMessageContent } from "@/utils/formatting";
 import { DiscordMessage, DiscordUser } from "@/types/discord";
 import { DISCORD_USER_INFO } from "@/utils/contansts";
 import { fetchDiscordMessages } from "@/lib/discord";
+import envVars from "@/config/env";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-const discordApiRedirectUrl = `${apiUrl}/api/auth/discord`;
+const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
 
 const DiscordMessagesContainer = styled.div``;
 

@@ -1,7 +1,8 @@
 import { useUserAuth } from "@/hooks/useUserAuth";
-import { Button } from '@mantine/core';
+import { Button } from "@mantine/core";
+import envVars from "@/config/env";
 
-const apiUrl = import.meta.env.VITE_API_URL
+const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
 
 function NavBar() {
   const { handleLogout, user } = useUserAuth();
@@ -18,11 +19,19 @@ function NavBar() {
               style={{ borderRadius: 50, width: 50, height: 50 }}
             />
           </div>
-          <Button color="gray" onClick={handleLogout}>logout</Button>
+          <Button color="gray" onClick={handleLogout}>
+            logout
+          </Button>
         </div>
       ) : (
         <div>
-          <Button color="indigo" component="a" href={`${apiUrl}/api/auth/discord`}>Login with Discord</Button>
+          <Button
+            color="indigo"
+            component="a"
+            href={discordApiRedirectUrl}
+          >
+            Login with Discord
+          </Button>
         </div>
       )}
     </nav>
