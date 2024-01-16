@@ -3,14 +3,11 @@ import { LOGGING_CODE } from "@/utils/contansts";
 import { Axiom } from "@axiomhq/js";
 import { type AxiosResponse, AxiosError } from "axios";
 import { isAxiosResponse } from "./axios";
-
-const axiomToken = import.meta.env.VITE_AXIOM_TOKEN || "";
-const axiomOrgId = import.meta.env.VITE_AXIOM_ORG_ID || "";
-const axiomDataset = import.meta.env.VITE_AXIOM_DATASET || "";
+import envVars from "@/config/env";
 
 const axiom = new Axiom({
-  token: axiomToken,
-  orgId: axiomOrgId,
+  token: envVars.axiomToken,
+  orgId: envVars.axiomOrgId,
 });
 
 function createLoggingEvent(
@@ -47,12 +44,11 @@ export async function ingestAxiomData(
 ) {
   try {
     const loggingEvent = createLoggingEvent(axiosResponse);
-    axiom.ingest(axiomDataset, [loggingEvent]);
+    axiom.ingest(envVars.axiomDataset, [loggingEvent]);
     await axiom.flush();
   } catch (error) {
     console.log(error);
   }
 }
 
-export { axiomDataset };
 export default axiom;

@@ -1,13 +1,12 @@
+import envVars from "@/config/env";
 import axios, { AxiosResponse } from "axios";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
 const axiosInstance = axios.create({
-  baseURL: apiUrl,
+  baseURL: envVars.apiUrl,
 });
 
 export function isAxiosResponse(obj: any): obj is AxiosResponse {
-  return 'data' in obj && 'status' in obj && 'headers' in obj;
+  return "data" in obj && "status" in obj && "headers" in obj;
 }
 
 export default axiosInstance;

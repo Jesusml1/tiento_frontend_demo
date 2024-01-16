@@ -2,6 +2,7 @@ import { InstagramPost } from "@/types/instagram";
 import axios from "./axios";
 import { ingestAxiomData } from "./axiom";
 import { AxiosError } from "axios";
+import { API_ENDPOINTS } from "@/utils/contansts";
 
 /**
  * Fetch Instagram posts from API
@@ -9,7 +10,7 @@ import { AxiosError } from "axios";
  */
 async function fetchInstagramPosts(): Promise<Array<InstagramPost>> {
   try {
-    const response = await axios.get("/api/community/instagram");
+    const response = await axios.get(API_ENDPOINTS.COMMUNITY_INSTAGRAM);
     if (response.status === 200) {
       const posts: Array<InstagramPost> = response.data.payload.data;
       return posts;
