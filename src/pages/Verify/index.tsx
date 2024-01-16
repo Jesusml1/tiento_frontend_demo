@@ -13,6 +13,13 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { checkVerificationCode, sendVerificationCode } from "@/lib/auth";
+import {
+  emptyEmailNotification,
+  emptyVerificationCodeNotification,
+  invalidVerificationCodeNotification,
+  timeOverNotification,
+  verificationCodeSendNotification,
+} from "./constants/notifications";
 
 function VerifyEmail() {
   const { user } = useUserAuth();
@@ -28,11 +35,7 @@ function VerifyEmail() {
   useEffect(() => {
     if (time === 0) {
       stopTimer();
-      notifications.show({
-        title: "Time's up",
-        message: "Resend your email to receive a new validation code",
-        color: "yellow",
-      });
+      notifications.show(timeOverNotification);
       setEmailSubmited(false);
     }
   }, [time]);
@@ -46,21 +49,13 @@ function VerifyEmail() {
   function handleEmailSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (email === "") {
-      notifications.show({
-        title: "There is no email",
-        message: "You must introduce a valid email",
-        color: "red",
-      });
+      notifications.show(emptyEmailNotification);
     } else {
       setLoading(true);
       sendVerificationCode(email, user?.id, token)
         .then((res) => {
           if (res && res.status === 200) {
-            notifications.show({
-              title: "Verification code sent!",
-              message: "Check your inbox, please",
-              color: "green",
-            });
+            notifications.show(verificationCodeSendNotification);
             setEmailSubmited(true);
             startTimer();
           }
@@ -75,11 +70,7 @@ function VerifyEmail() {
   function handleVerficationCodeSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (verificationCode === "") {
-      notifications.show({
-        title: "Empty verification code",
-        message: "You must introduce the verification code send to your email",
-        color: "red",
-      });
+      notifications.show(emptyVerificationCodeNotification);
     } else {
       setLoading(true);
       checkVerificationCode(verificationCode, token)
@@ -94,12 +85,7 @@ function VerifyEmail() {
         })
         .catch((err) => {
           console.log(err);
-          notifications.show({
-            title: "Invalid verification code",
-            message:
-              "You must introduce the verification code send to your email",
-            color: "red",
-          });
+          notifications.show(invalidVerificationCodeNotification);
         })
         .finally(() => {
           setLoading(false);
