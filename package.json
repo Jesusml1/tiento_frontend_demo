@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@axiomhq/js": "^1.0.0-rc.1",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@mantine/core": "^6.0.9",
