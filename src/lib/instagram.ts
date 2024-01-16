@@ -1,9 +1,7 @@
 import { InstagramPost } from "@/types/instagram";
 import axios from "./axios";
-import { digestAxiomData } from "./axiom";
+import { ingestAxiomData } from "./axiom";
 import { AxiosError } from "axios";
-import { LoggingEvent } from "@/types/logging";
-import { LOGGING_CODE } from "@/utils/contansts";
 
 /**
  * Fetch Instagram posts from API
@@ -16,17 +14,11 @@ async function fetchInstagramPosts(): Promise<Array<InstagramPost>> {
       const posts: Array<InstagramPost> = response.data.payload.data;
       return posts;
     }
+    await ingestAxiomData(response);
     return [];
   } catch (error) {
     if (error instanceof AxiosError) {
-      await digestAxiomData({
-        code: LOGGING_CODE.FAILED_TO_FETCH,
-        details: {
-          statusCode: error.response?.status,
-          error: error.response?.data,
-          endpoint: error.config?.url,
-        },
-      } as LoggingEvent);
+      await ingestAxiomData(error);
     }
     return [];
   }
