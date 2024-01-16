@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useTimer from "@/hooks/useTimer";
-import axios from "@/utils/axios";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -13,6 +12,7 @@ import {
   Title,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
+import axios from "@/lib/axios";
 
 function VerifyEmail() {
   const { user } = useUserAuth();
@@ -53,6 +53,7 @@ function VerifyEmail() {
       });
     } else {
       setLoading(true);
+      // TODO: refactor request to function outside this file
       axios
         .post(
           "/api/auth/verify",
