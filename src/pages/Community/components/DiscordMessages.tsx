@@ -1,13 +1,17 @@
 import styled from "@emotion/styled";
 import { ReactComponent as DiscordLogo } from "@/assets/discord.svg";
 import { useEffect, useState } from "react";
-import axios from "@/utils/axios";
 import TabName from "./TabName";
 import { Flex } from "@mantine/core";
 import Container from "./Container";
 import ScrollView from "./ScrollView";
+import { formatLongDiscordMessageContent } from "@/utils/formatting";
+import { DiscordMessage, DiscordUser } from "@/types/discord";
+import { DISCORD_USER_INFO } from "@/utils/contansts";
+import { fetchMessages } from "@/lib/discord";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+const discordApiRedirectUrl = `${apiUrl}/api/auth/discord`;
 
 const DiscordMessagesContainer = styled.div``;
 
@@ -50,52 +54,8 @@ const DiscordAttachmentImage = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
-`
+`;
 
-export interface DiscordAttachment {
-  id: string;
-  filename: string;
-  size: number;
-  url: string;
-  proxy_url: string;
-  width: number;
-  height: number;
-}
-
-export interface DiscordMessage {
-  author: string;
-  content: string;
-  date: string;
-  channel_name: string;
-  attachment: Array<DiscordAttachment>;
-}
-
-interface DiscordUser {
-  id: string;
-  username: string;
-}
-
-async function fetchMessages(discordUser: DiscordUser) {
-  try {
-    const response = await axios.post("/api/community/discord", {
-      username: discordUser.username,
-    });
-    if (response.status === 200) {
-      return response.data.data;
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-}
-
-function formatMessageContent(message: string): string {
-  if (message.length > 299) {
-    return message.slice(0, 300) + "...💬";
-  }
-  return message;
-}
 
 function DiscordMessages() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -103,7 +63,7 @@ function DiscordMessages() {
   const [noUser, setNoUser] = useState<boolean>(false);
 
   useEffect(() => {
-    const discordUserStr = localStorage.getItem("discord_user_info");
+    const discordUserStr = localStorage.getItem(DISCORD_USER_INFO);
     if (discordUserStr !== null) {
       const discordUser: DiscordUser = JSON.parse(discordUserStr);
       if (discordUser !== null) {
@@ -127,7 +87,7 @@ function DiscordMessages() {
       <ScrollView bgColor="rgba(98, 92, 241, 0.3)">
         {loading && <div>Loading...</div>}
         {noUser && (
-          <a href={`${apiUrl}/api/auth/discord`} style={{ color: "white" }}>
+          <a href={discordApiRedirectUrl} style={{ color: "white" }}>
             Connect with discord
           </a>
         )}
@@ -142,7 +102,7 @@ function DiscordMessages() {
               </Flex>
               <DiscordMessageDateTime>{message.date}</DiscordMessageDateTime>
               <DiscordMessageContent>
-                {formatMessageContent(message.content)}
+                {formatLongDiscordMessageContent(message.content)}
               </DiscordMessageContent>
               <Flex direction="column" rowGap={15}>
                 {message.attachment.map((att) => (

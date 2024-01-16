@@ -1,4 +1,4 @@
-import { DiscordMessage } from "@/pages/Community/components/DiscordMessages";
+import { DiscordMessage } from "@/types/discord";
 
 export default [
   {

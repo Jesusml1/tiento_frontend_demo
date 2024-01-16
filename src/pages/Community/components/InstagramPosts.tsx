@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { ReactComponent as InstagramLogo } from "@/assets/instagram.svg";
 import { useEffect, useState } from "react";
-import axios from "@/utils/axios";
-// import instagramPosts from "@/data/mockInstagramPosts";
 import TabName from "./TabName";
 import Container from "./Container";
 import ScrollView from "./ScrollView";
+import { InstagramPost } from "@/types/instagram";
+import { fetchPosts } from "@/lib/instagram";
 
 const InstagramPosts = styled.div``;
 
@@ -28,26 +28,6 @@ const InstagramImage = styled.img`
 const InstagramPostDescription = styled.div`
   font-size: 1rem;
 `;
-
-interface InstagramPost {
-  id: string;
-  caption: string;
-  media_url: string;
-}
-
-async function fetchPosts() {
-  try {
-    const response = await axios.get("/api/community/instagram");
-    if (response.status === 200) {
-      const posts: Array<InstagramPost> = response.data.payload.data;
-      return posts;
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-}
 
 function InstagramMessages() {
   const [loading, setLoading] = useState<boolean>(false);
