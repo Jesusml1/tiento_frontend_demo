@@ -5,7 +5,7 @@ import TabName from "./TabName";
 import Container from "./Container";
 import ScrollView from "./ScrollView";
 import { InstagramPost } from "@/types/instagram";
-import { fetchPosts } from "@/lib/instagram";
+import { fetchInstagramPosts } from "@/lib/instagram";
 
 const InstagramPosts = styled.div``;
 
@@ -35,7 +35,7 @@ function InstagramMessages() {
 
   useEffect(() => {
     setLoading(true);
-    fetchPosts()
+    fetchInstagramPosts()
       .then(setPosts)
       .finally(() => {
         setLoading(false);

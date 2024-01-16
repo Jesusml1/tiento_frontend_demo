@@ -10,7 +10,7 @@ import { LOGGING_CODE } from "@/utils/contansts";
  * @param {DiscordUser} discordUser
  * @returns {Promise<Array<DiscordMessage>>}
  */
-async function fetchMessages(
+async function fetchDiscordMessages(
   discordUser: DiscordUser
 ): Promise<Array<DiscordMessage>> {
   try {
@@ -37,4 +37,4 @@ async function fetchMessages(
   }
 }
 
-export { fetchMessages };
+export { fetchDiscordMessages };

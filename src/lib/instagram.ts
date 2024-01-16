@@ -9,7 +9,7 @@ import { LOGGING_CODE } from "@/utils/contansts";
  * Fetch Instagram posts from API
  * @returns {Promise<Array<DiscordMessage>>}
  */
-export async function fetchPosts(): Promise<Array<InstagramPost>> {
+async function fetchInstagramPosts(): Promise<Array<InstagramPost>> {
   try {
     const response = await axios.get("/api/community/instagram");
     if (response.status === 200) {
@@ -31,3 +31,5 @@ export async function fetchPosts(): Promise<Array<InstagramPost>> {
     return [];
   }
 }
+
+export { fetchInstagramPosts };

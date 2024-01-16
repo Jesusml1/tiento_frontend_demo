@@ -8,7 +8,7 @@ import ScrollView from "./ScrollView";
 import { formatLongDiscordMessageContent } from "@/utils/formatting";
 import { DiscordMessage, DiscordUser } from "@/types/discord";
 import { DISCORD_USER_INFO } from "@/utils/contansts";
-import { fetchMessages } from "@/lib/discord";
+import { fetchDiscordMessages } from "@/lib/discord";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const discordApiRedirectUrl = `${apiUrl}/api/auth/discord`;
@@ -68,7 +68,7 @@ function DiscordMessages() {
       const discordUser: DiscordUser = JSON.parse(discordUserStr);
       if (discordUser !== null) {
         setLoading(true);
-        fetchMessages(discordUser)
+        fetchDiscordMessages(discordUser)
           .then(setMessages)
           .finally(() => {
             setLoading(false);
