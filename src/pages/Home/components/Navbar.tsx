@@ -1,8 +1,9 @@
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { Button } from "@mantine/core";
 import envVars from "@/config/env";
+import { API_ENDPOINTS } from "@/utils/contansts";
 
-const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
+const discordApiRedirectUrl = envVars.apiUrl + API_ENDPOINTS.AUTH_DISCORD;
 
 function NavBar() {
   const { handleLogout, user } = useUserAuth();
@@ -25,11 +26,7 @@ function NavBar() {
         </div>
       ) : (
         <div>
-          <Button
-            color="indigo"
-            component="a"
-            href={discordApiRedirectUrl}
-          >
+          <Button color="indigo" component="a" href={discordApiRedirectUrl}>
             Login with Discord
           </Button>
         </div>

@@ -2,6 +2,7 @@ import { DiscordMessage, DiscordUser } from "@/types/discord";
 import axios from "./axios";
 import { ingestAxiomData } from "./axiom";
 import { AxiosError } from "axios";
+import { API_ENDPOINTS } from "@/utils/contansts";
 
 /**
  * Fetch Discord messages from API
@@ -12,7 +13,7 @@ async function fetchDiscordMessages(
   discordUser: DiscordUser
 ): Promise<Array<DiscordMessage>> {
   try {
-    const response = await axios.post("/api/community/discord", {
+    const response = await axios.post(API_ENDPOINTS.COMMUNITY_DISCORD, {
       username: discordUser.username,
     });
     if (response.status === 200) {

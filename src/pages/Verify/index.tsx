@@ -12,7 +12,7 @@ import {
   Title,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import axios from "@/lib/axios";
+import { checkVerificationCode, sendVerificationCode } from "@/lib/auth";
 
 function VerifyEmail() {
   const { user } = useUserAuth();
@@ -53,15 +53,9 @@ function VerifyEmail() {
       });
     } else {
       setLoading(true);
-      // TODO: refactor request to function outside this file
-      axios
-        .post(
-          "/api/auth/verify",
-          { email: email, discord_id: user?.id },
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
+      sendVerificationCode(email, user?.id, token)
         .then((res) => {
-          if (res.status === 200) {
+          if (res && res.status === 200) {
             notifications.show({
               title: "Verification code sent!",
               message: "Check your inbox, please",
@@ -88,15 +82,9 @@ function VerifyEmail() {
       });
     } else {
       setLoading(true);
-      axios
-        .put(
-          "/api/auth/verify-email",
-          { code: verificationCode },
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
+      checkVerificationCode(verificationCode, token)
         .then((res) => {
-          console.log(res.data);
-          if (res.data.result?.data[0] !== null) {
+          if (res && res.data.result?.data[0] !== null) {
             localStorage.setItem(
               "user",
               JSON.stringify(res.data?.result?.data[0])

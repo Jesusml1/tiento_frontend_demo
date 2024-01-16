@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { ReactComponent as TientoLogo } from "@/assets/tiento-logo.svg";
 import { keyframes } from "@emotion/react";
-import { LANDING_ANIMATION_DURATION } from "@/utils/contansts";
+import { API_ENDPOINTS, LANDING_ANIMATION_DURATION } from "@/utils/contansts";
 import envVars from "@/config/env";
 
-const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
+const discordApiRedirectUrl = envVars.apiUrl + API_ENDPOINTS.AUTH_DISCORD;
 
 const HeroContainer = styled.div`
   display: flex;

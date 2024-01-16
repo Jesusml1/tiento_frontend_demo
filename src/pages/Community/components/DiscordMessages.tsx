@@ -7,11 +7,11 @@ import Container from "./Container";
 import ScrollView from "./ScrollView";
 import { formatLongDiscordMessageContent } from "@/utils/formatting";
 import { DiscordMessage, DiscordUser } from "@/types/discord";
-import { DISCORD_USER_INFO } from "@/utils/contansts";
+import { API_ENDPOINTS, DISCORD_USER_INFO } from "@/utils/contansts";
 import { fetchDiscordMessages } from "@/lib/discord";
 import envVars from "@/config/env";
 
-const discordApiRedirectUrl = `${envVars.apiUrl}/api/auth/discord`;
+const discordApiRedirectUrl = envVars.apiUrl + API_ENDPOINTS.AUTH_DISCORD;
 
 const DiscordMessagesContainer = styled.div``;
 
